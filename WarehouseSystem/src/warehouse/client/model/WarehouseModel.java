@@ -2,6 +2,6 @@ package warehouse.client.model;
 
 import warehouse.shared.util.PropertyChangeSubject;
 
-public interface WarehouseModel extends PropertyChangeSubject
-{
+public interface WarehouseModel extends PropertyChangeSubject {
+    void login(String username, String password);
 }

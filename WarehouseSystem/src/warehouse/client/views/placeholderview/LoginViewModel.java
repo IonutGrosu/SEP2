@@ -2,11 +2,11 @@ package warehouse.client.views.placeholderview;
 
 import warehouse.client.model.WarehouseModel;
 
-public class PlaceholderViewModel
+public class LoginViewModel
 {
   private WarehouseModel warehouseModel;
 
-  public PlaceholderViewModel(WarehouseModel warehouseModel)
+  public LoginViewModel(WarehouseModel warehouseModel)
   {
     this.warehouseModel = warehouseModel;
   }

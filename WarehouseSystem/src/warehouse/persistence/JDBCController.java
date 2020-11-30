@@ -1,5 +1,4 @@
 package warehouse.persistence;
 
-public interface PlaceholderDAO
-{
+public class JDBCController {
 }

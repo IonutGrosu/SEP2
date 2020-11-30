@@ -11,4 +11,9 @@ public class RMIServerImpl implements RMIServer
   {
     this.serverModel = serverModel;
   }
+
+  @Override
+  public void login(String username, String password) {
+
+  }
 }

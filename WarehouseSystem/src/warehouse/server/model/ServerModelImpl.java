@@ -1,14 +1,18 @@
 package warehouse.server.model;
 
-import warehouse.persistence.PlaceholderDAO;
+import warehouse.persistence.LoginDAO;
 
 public class ServerModelImpl implements ServerModel
 {
-  private PlaceholderDAO placeholderDAO;
+  private LoginDAO loginDAO;
 
-  public ServerModelImpl(PlaceholderDAO placeholderDAO)
+  public ServerModelImpl(LoginDAO loginDAO)
   {
-    this.placeholderDAO = placeholderDAO;
+    this.loginDAO = loginDAO;
   }
 
+  @Override
+  public boolean checkCredentials(String username, String password) {
+    return false;
+  }
 }

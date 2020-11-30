@@ -1,11 +1,17 @@
 package warehouse.client.core;
 
-public class ViewModelFactory
-{
-  private ModelFactory modelFactory;
+import warehouse.client.views.placeholderview.LoginViewModel;
 
-  public ViewModelFactory(ModelFactory modelFactory)
-  {
-    this.modelFactory = modelFactory;
-  }
+public class ViewModelFactory {
+    private ModelFactory modelFactory;
+    private LoginViewModel loginViewModel;
+
+    public ViewModelFactory(ModelFactory modelFactory) {
+        this.modelFactory = modelFactory;
+    }
+
+    public LoginViewModel getLoginViewModel() {
+        if (loginViewModel == null) loginViewModel = new LoginViewModel(modelFactory.getWarehouseModel());
+        return loginViewModel;
+    }
 }
