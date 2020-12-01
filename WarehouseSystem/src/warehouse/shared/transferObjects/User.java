@@ -10,4 +10,14 @@ public class User
     this.id = id;
     this.userType = userType;
   }
+
+  public int getId()
+  {
+    return id;
+  }
+
+  public UserType getUserType()
+  {
+    return userType;
+  }
 }

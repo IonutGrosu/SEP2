@@ -66,4 +66,20 @@ public class ViewHandler
     openLoginView();
     stage.show();
   }
+
+  public void openViewPlaceholder()
+  {
+  }
+
+  public void openView2Placeholder()
+  {
+  }
+
+  public void openView3Placeholder()
+  {
+  }
+
+  public void openView4Placeholder()
+  {
+  }
 }

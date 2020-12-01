@@ -1,5 +1,6 @@
 package warehouse.client.views.loginview;
 
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -9,6 +10,8 @@ import javafx.scene.input.KeyEvent;
 import warehouse.client.core.ViewHandler;
 import warehouse.client.core.ViewModelFactory;
 import warehouse.client.views.ViewController;
+
+import java.beans.PropertyChangeEvent;
 
 public class LoginViewController implements ViewController {
 
@@ -28,6 +31,12 @@ public class LoginViewController implements ViewController {
         errorLabelId.textProperty().setValue("");
         errorLabelId.textProperty().bind(loginViewModel.getError());
 
+        loginViewModel.addPropertyListener("loginResponse", this::openView);
+        loginViewModel.addPropertyListener("MANAGER", this::openView);
+        loginViewModel.addPropertyListener("EMPLOYEE", this::openView);
+        loginViewModel.addPropertyListener("ADMIN", this::openView);
+
+
         usernameId.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
@@ -42,6 +51,33 @@ public class LoginViewController implements ViewController {
                     sendCredentials();
             }
         });
+    }
+
+    private void openView(PropertyChangeEvent propertyChangeEvent)
+    {
+        switch (propertyChangeEvent.getPropertyName())
+        {
+            case "MANAGER" :
+                Platform.runLater(() -> {
+                    viewHandler.openViewPlaceholder();
+                });
+                break;
+            case "EMPLOYEE" :
+                Platform.runLater(() -> {
+                    viewHandler.openView2Placeholder();
+                });
+                break;
+            case "ADMIN" :
+                Platform.runLater(() -> {
+                    viewHandler.openView3Placeholder();
+                });
+                break;
+            case "loginResponse" :
+                Platform.runLater(() -> {
+                    viewHandler.openView4Placeholder();
+                });
+                break;
+        }
     }
 
     @FXML

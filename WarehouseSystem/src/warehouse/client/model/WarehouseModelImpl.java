@@ -1,6 +1,8 @@
 package warehouse.client.model;
 
 import warehouse.client.networking.Client;
+import warehouse.shared.transferObjects.User;
+import warehouse.shared.transferObjects.UserType;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -12,18 +14,32 @@ public class WarehouseModelImpl implements WarehouseModel
   private Client client;
   private PropertyChangeSupport support;
   private boolean temporaryBoolean;
+  private User user;
 
   public WarehouseModelImpl(Client client)
   {
     this.client = client;
     support = new PropertyChangeSupport(this);
     client.addPropertyListener("loginResponse", this::loginResponse);
+    client.addPropertyListener("errorResponse", this::loginResponse);
   }
 
   private void loginResponse(PropertyChangeEvent propertyChangeEvent)
   {
-    temporaryBoolean = (boolean) propertyChangeEvent.getNewValue();
-    support.firePropertyChange("loginResponse", null, temporaryBoolean);
+    support.firePropertyChange(propertyChangeEvent);
+//    user = (User) propertyChangeEvent.getNewValue();
+//    switch (user.getUserType())
+//    {
+//      case MANAGER :
+//        support.firePropertyChange("MANAGER", null, user);
+//        break;
+//      case EMPLOYEE:
+//        support.firePropertyChange("EMPLOYEE", null, user);
+//        break;
+//      case ADMIN:
+//        support.firePropertyChange("ADMIN", null, user);
+//        break;
+//    }
   }
 
   @Override
