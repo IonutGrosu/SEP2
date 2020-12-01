@@ -1,6 +1,6 @@
 package warehouse.client.core;
 
-import warehouse.client.views.placeholderview.LoginViewModel;
+import warehouse.client.views.loginview.LoginViewModel;
 
 public class ViewModelFactory {
     private ModelFactory modelFactory;
