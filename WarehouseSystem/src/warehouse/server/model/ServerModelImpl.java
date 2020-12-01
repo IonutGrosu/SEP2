@@ -13,6 +13,7 @@ public class ServerModelImpl implements ServerModel
 
   @Override
   public boolean checkCredentials(String username, String password) {
-    return false;
+//   CHECKING IN HERE
+    return loginDAO.checkCredentials(username, password);
   }
 }
