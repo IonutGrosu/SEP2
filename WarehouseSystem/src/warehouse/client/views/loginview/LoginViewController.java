@@ -58,24 +58,26 @@ public class LoginViewController implements ViewController {
         switch (propertyChangeEvent.getPropertyName())
         {
             case "MANAGER" :
-                Platform.runLater(() -> {
-                    viewHandler.openViewPlaceholder();
-                });
+//                Platform.runLater(() -> {
+//                    viewHandler.openViewPlaceholder();
+//                });
                 break;
             case "EMPLOYEE" :
-                Platform.runLater(() -> {
-                    viewHandler.openView2Placeholder();
-                });
+//                Platform.runLater(() -> {
+//                    viewHandler.openView2Placeholder();
+//                });
                 break;
             case "ADMIN" :
-                Platform.runLater(() -> {
-                    viewHandler.openView3Placeholder();
-                });
+//                Platform.runLater(() -> {
+//                    viewHandler.openView3Placeholder();
+//                });
                 break;
             case "loginResponse" :
-                Platform.runLater(() -> {
-                    viewHandler.openView4Placeholder();
-                });
+//                Platform.runLater(() -> {
+//                    viewHandler.openView4Placeholder();
+//                });
+                System.out.println("It works and here in the controller should"
+                    + " call the next view");
                 break;
         }
     }
