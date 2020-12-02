@@ -1,13 +1,13 @@
 package warehouse.client.core;
 
-import warehouse.client.views.adminview.AdminViewModel;
+import warehouse.client.views.adminview.employees.AdminEmployeeViewModel;
 import warehouse.client.views.loginview.LoginViewModel;
 
 public class ViewModelFactory
 {
   private ModelFactory modelFactory;
   private LoginViewModel loginViewModel;
-  private AdminViewModel adminViewModel;
+  private AdminEmployeeViewModel adminEmployeeViewModel;
 
   public ViewModelFactory(ModelFactory modelFactory)
   {
@@ -21,10 +21,10 @@ public class ViewModelFactory
     return loginViewModel;
   }
 
-  public AdminViewModel getAdminViewModel()
+  public AdminEmployeeViewModel getAdminViewModel()
   {
-    if (adminViewModel == null)
-      adminViewModel = new AdminViewModel(modelFactory.getWarehouseModel());
-    return adminViewModel;
+    if (adminEmployeeViewModel == null)
+      adminEmployeeViewModel = new AdminEmployeeViewModel(modelFactory.getWarehouseModel());
+    return adminEmployeeViewModel;
   }
 }

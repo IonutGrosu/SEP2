@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import warehouse.client.views.adminview.employees.AdminEmployeeViewController;
 import warehouse.client.views.loginview.LoginViewController;
 
 import java.io.IOException;
@@ -68,8 +69,8 @@ public class ViewHandler
 
     if(adminScene == null)
     {
-      Parent root = getRootByPath("../views/adminview/admin.fxml", loader);
-      LoginViewController controller = loader.getController();
+      Parent root = getRootByPath("../views/adminview/employees/adminEmployee.fxml", loader);
+      AdminEmployeeViewController controller = loader.getController();
       controller.init(this, viewModelFactory);
       adminScene = new Scene(root);
     }
