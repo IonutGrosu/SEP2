@@ -16,6 +16,7 @@ public class ViewHandler
   private ViewModelFactory viewModelFactory;
   private Stage stage;
   private Scene loginScene;
+  private Scene adminScene;
 //  private static Map<String, Scene> scenes;
 //  private static ArrayList<String> names;
 
@@ -59,6 +60,22 @@ public class ViewHandler
 
     stage.setTitle("Login");
     stage.setScene(loginScene);
+  }
+
+  public void openAdminView()
+  {
+    FXMLLoader loader = new FXMLLoader();
+
+    if(adminScene == null)
+    {
+      Parent root = getRootByPath("../views/adminview/admin.fxml", loader);
+      LoginViewController controller = loader.getController();
+      controller.init(this, viewModelFactory);
+      adminScene = new Scene(root);
+    }
+
+    stage.setTitle("Welcome Admin");
+    stage.setScene(adminScene);
   }
 
   public void start()
