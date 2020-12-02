@@ -4,9 +4,13 @@ import warehouse.persistence.LoginDAO;
 
 import java.beans.PropertyChangeListener;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 public class ServerModelImpl implements ServerModel
 {
   private LoginDAO loginDAO;
+  private PropertyChangeSupport support;
 
   public ServerModelImpl(LoginDAO loginDAO)
   {
@@ -15,13 +19,18 @@ public class ServerModelImpl implements ServerModel
 
   @Override
   public boolean checkCredentials(String username, String password) {
-//   CHECKING IN HERE
     return loginDAO.checkCredentials(username, password);
   }
+
 
   @Override public void addPropertyListener(String eventName,
       PropertyChangeListener listener)
   {
-
+    if(eventName == null)
+    {
+      support.addPropertyChangeListener(listener);
+    } else {
+      support.addPropertyChangeListener(eventName, listener);
+    }
   }
 }

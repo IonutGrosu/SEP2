@@ -10,29 +10,23 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 
 public class RMIClientImpl implements Client, ClientCallback
 {
   private RMIServer rmiServer;
   private PropertyChangeSupport support;
 
+
   public RMIClientImpl()
   {
     support = new PropertyChangeSupport(this);
-  }
-  public void startClient(){
     Registry registry = null;
     try
     {
       registry = LocateRegistry.getRegistry("localhost", 9999);
-    }
-    catch (RemoteException e)
-    {
-      e.printStackTrace();
-    }
-    try
-    {
       rmiServer = (RMIServer)registry.lookup("Server");
+      System.out.println("Client Connected");
     }
     catch (RemoteException e)
     {
@@ -46,12 +40,12 @@ public class RMIClientImpl implements Client, ClientCallback
   @Override public void login(String username, String password)
       throws RemoteException
   {
-   rmiServer.login(username, password);
+   rmiServer.getLoginServer().login(username, password);
   }
 
-  @Override public void loginResponse()
+  @Override public void loginResponse(boolean b)
   {
-    support.firePropertyChange("loginResponse", null, true);
+    support.firePropertyChange("loginResponse", null, b);
   }
 
   @Override public void addPropertyListener(String eventName,

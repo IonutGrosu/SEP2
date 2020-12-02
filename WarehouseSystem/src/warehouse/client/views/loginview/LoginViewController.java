@@ -85,6 +85,7 @@ public class LoginViewController implements ViewController {
     @FXML
     public void sendCredentials()
     {
+        if (usernameId != null && passwordId != null)
         loginViewModel.sendCredentials(usernameId.getText(), passwordId.getText());
     }
 }
