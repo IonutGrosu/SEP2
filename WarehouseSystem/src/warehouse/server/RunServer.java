@@ -19,7 +19,7 @@ public class RunServer
   public static void main(String[] args)
       throws RemoteException, AlreadyBoundException
   {
-    LoginDAO loginDAO = new LoginDAOImpl();
+    LoginDAO loginDAO = LoginDAOImpl.getInstance();
     ServerModel serverModel = new ServerModelImpl(loginDAO);
     RMIServer server = new RMIServerImpl(serverModel);
     Registry registry = LocateRegistry.createRegistry(9999);

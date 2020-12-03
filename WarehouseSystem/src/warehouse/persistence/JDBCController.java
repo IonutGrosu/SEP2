@@ -22,9 +22,9 @@ public class JDBCController {
 
   public Connection getConnection() throws SQLException
   {
-    String url = "hattie.db.elephantsql.com:5432/wzzxaats?currentSchema=SEP2_Database";
-    String username = "postgres";
-    String password = "9533";
+    String url = "jdbc:postgresql://hattie.db.elephantsql.com:5432/wzzxaats?currentSchema=sep2database";
+    String username = "wzzxaats";
+    String password = "1-8RvGmhU--OEaBVP5hXi_7IqOYK-7Sp";
     return DriverManager.getConnection(url, username, password);
   }
 
