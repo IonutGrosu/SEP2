@@ -23,7 +23,7 @@ public class AdminUsersOverviewViewController implements ViewController
       ViewModelFactory viewModelFactory)
   {
     this.viewHandler = viewHandler;
-    adminUsersOverviewViewModel = viewModelFactory.getAdminViewModel();
+    adminUsersOverviewViewModel = viewModelFactory.getAdminUsersOverviewViewModel();
   }
 
   public void onAdd(ActionEvent actionEvent)
