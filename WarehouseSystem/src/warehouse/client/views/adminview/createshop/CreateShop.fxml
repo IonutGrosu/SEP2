@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="warehouse.client.views.adminview.createshop.CreateShopViewController">
+   <children>
+      <HBox layoutX="1.0" layoutY="1.0" prefHeight="45.0" prefWidth="600.0">
+         <children>
+            <Button fx:id="logout" mnemonicParsing="false" onAction="#onLogout" prefHeight="44.0" prefWidth="66.0" text="Logout" />
+            <Button fx:id="goToUserOverview" mnemonicParsing="false" onAction="#onShopsOverview" prefHeight="44.0" prefWidth="129.0" text="Shops Overview" />
+         </children></HBox>
+      <AnchorPane layoutY="45.0" prefHeight="355.0" prefWidth="600.0">
+         <children>
+            <GridPane layoutX="179.0" layoutY="129.0" prefHeight="98.0" prefWidth="243.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="116.0" minWidth="10.0" prefWidth="81.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="162.0" minWidth="10.0" prefWidth="162.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TextField fx:id="cityTextField" GridPane.columnIndex="1" />
+                  <Label text="City" />
+                  <Label text="Street" GridPane.rowIndex="1" />
+                  <TextField fx:id="streetTextField" prefWidth="203.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+            <Button fx:id="onCreateButton" layoutX="270.0" layoutY="254.0" mnemonicParsing="false" text="Create" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

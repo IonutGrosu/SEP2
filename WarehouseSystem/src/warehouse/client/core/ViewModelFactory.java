@@ -1,5 +1,6 @@
 package warehouse.client.core;
 
+import warehouse.client.views.adminview.createshop.CreateShopViewModel;
 import warehouse.client.views.adminview.shopsoverview.AdminShopsOverviewViewModel;
 import warehouse.client.views.adminview.usersoverview.AdminUsersOverviewViewModel;
 import warehouse.client.views.loginview.LoginViewModel;
@@ -10,6 +11,7 @@ public class ViewModelFactory
   private LoginViewModel loginViewModel;
   private AdminUsersOverviewViewModel adminUsersOverviewViewModel;
   private AdminShopsOverviewViewModel adminShopsOverviewViewModel;
+  private CreateShopViewModel createShopViewModel;
 
   public ViewModelFactory(ModelFactory modelFactory)
   {
@@ -35,4 +37,10 @@ public class ViewModelFactory
       adminShopsOverviewViewModel = new AdminShopsOverviewViewModel(modelFactory.getWarehouseModel());
     return adminShopsOverviewViewModel;
   }
+
+    public CreateShopViewModel getCreateShopViewModel() {
+    if (createShopViewModel == null)
+      createShopViewModel = new CreateShopViewModel(modelFactory.getWarehouseModel());
+    return createShopViewModel;
+    }
 }
