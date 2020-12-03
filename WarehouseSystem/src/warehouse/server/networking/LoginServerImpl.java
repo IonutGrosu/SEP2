@@ -9,6 +9,7 @@ import warehouse.shared.util.PropertyChangeSubject;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +20,14 @@ boolean b;
 
   public LoginServerImpl(ServerModel serverModel)
   {
+    try
+    {
+      UnicastRemoteObject.exportObject(this, 0);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
     this.serverModel = serverModel;
   }
 
