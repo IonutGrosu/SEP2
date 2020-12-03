@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="warehouse.client.views.adminview.createuser.CreateUserViewController">
+   <children>
+      <HBox layoutX="-8.0" prefHeight="45.0" prefWidth="608.0">
+         <children>
+            <Button fx:id="logout" mnemonicParsing="false" onAction="#onLogout" prefHeight="44.0" prefWidth="134.0" text="Users Overview" />
+            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="109.0" text="Shops" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
