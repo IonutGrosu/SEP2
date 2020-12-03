@@ -22,7 +22,7 @@ public class RunServer
     LoginDAO loginDAO = new LoginDAOImpl();
     ServerModel serverModel = new ServerModelImpl(loginDAO);
     RMIServer server = new RMIServerImpl(serverModel);
-    Registry registry = LocateRegistry.createRegistry(9999);
+    Registry registry = LocateRegistry.createRegistry(1099);
     System.out.println("Registry Created");
     registry.bind("Server", server);
     System.out.println("Server starting");

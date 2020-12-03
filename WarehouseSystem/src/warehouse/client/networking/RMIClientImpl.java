@@ -16,15 +16,25 @@ public class RMIClientImpl implements Client, ClientCallback
 {
   private RMIServer rmiServer;
   private PropertyChangeSupport support;
+  private boolean b;
+
 
   public RMIClientImpl()
   {
+    try
+    {
+      UnicastRemoteObject.exportObject(this, 0);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
     support = new PropertyChangeSupport(this);
     Registry registry = null;
     try
     {
-      registry = LocateRegistry.getRegistry("localhost", 9999);
-      rmiServer = (RMIServer) registry.lookup("Server");
+      registry = LocateRegistry.getRegistry("localhost", 1099);
+      rmiServer = (RMIServer)registry.lookup("Server");
       System.out.println("Client Connected");
     }
     catch (RemoteException e)
@@ -36,11 +46,11 @@ public class RMIClientImpl implements Client, ClientCallback
       e.printStackTrace();
     }
   }
-
   @Override public void login(String username, String password)
       throws RemoteException
   {
-    rmiServer.getLoginServer().login(username, password);
+    System.out.println("Client Asks For Verification");
+ b = rmiServer.getLoginServer().login(username, password);
   }
 
   @Override public void loginResponse(boolean b)
@@ -51,12 +61,10 @@ public class RMIClientImpl implements Client, ClientCallback
   @Override public void addPropertyListener(String eventName,
       PropertyChangeListener listener)
   {
-    if (eventName == null)
+    if(eventName == null)
     {
       support.addPropertyChangeListener(listener);
-    }
-    else
-    {
+    } else {
       support.addPropertyChangeListener(eventName, listener);
     }
   }
