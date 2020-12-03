@@ -4,13 +4,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import warehouse.client.views.adminview.employees.AdminEmployeeViewController;
+import warehouse.client.views.adminview.usersoverview.AdminUsersOverviewViewController;
 import warehouse.client.views.loginview.LoginViewController;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ViewHandler
 {
@@ -69,8 +66,8 @@ public class ViewHandler
 
     if(adminScene == null)
     {
-      Parent root = getRootByPath("../views/adminview/employees/adminEmployee.fxml", loader);
-      AdminEmployeeViewController controller = loader.getController();
+      Parent root = getRootByPath("../views/adminview/employees/adminUsersOverview.fxml", loader);
+      AdminUsersOverviewViewController controller = loader.getController();
       controller.init(this, viewModelFactory);
       adminScene = new Scene(root);
     }

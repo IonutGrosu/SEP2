@@ -17,7 +17,6 @@ public class RMIClientImpl implements Client, ClientCallback
   private RMIServer rmiServer;
   private PropertyChangeSupport support;
 
-
   public RMIClientImpl()
   {
     support = new PropertyChangeSupport(this);
@@ -25,7 +24,7 @@ public class RMIClientImpl implements Client, ClientCallback
     try
     {
       registry = LocateRegistry.getRegistry("localhost", 9999);
-      rmiServer = (RMIServer)registry.lookup("Server");
+      rmiServer = (RMIServer) registry.lookup("Server");
       System.out.println("Client Connected");
     }
     catch (RemoteException e)
@@ -37,10 +36,11 @@ public class RMIClientImpl implements Client, ClientCallback
       e.printStackTrace();
     }
   }
+
   @Override public void login(String username, String password)
       throws RemoteException
   {
-   rmiServer.getLoginServer().login(username, password);
+    rmiServer.getLoginServer().login(username, password);
   }
 
   @Override public void loginResponse(boolean b)
@@ -51,10 +51,12 @@ public class RMIClientImpl implements Client, ClientCallback
   @Override public void addPropertyListener(String eventName,
       PropertyChangeListener listener)
   {
-    if(eventName == null)
+    if (eventName == null)
     {
       support.addPropertyChangeListener(listener);
-    } else {
+    }
+    else
+    {
       support.addPropertyChangeListener(eventName, listener);
     }
   }

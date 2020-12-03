@@ -1,4 +1,4 @@
-package warehouse.client.views.adminview.employees;
+package warehouse.client.views.adminview.usersoverview;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,10 +8,10 @@ import warehouse.client.core.ViewHandler;
 import warehouse.client.core.ViewModelFactory;
 import warehouse.client.views.ViewController;
 
-public class AdminEmployeeViewController implements ViewController
+public class AdminUsersOverviewViewController implements ViewController
 {
   private ViewHandler viewHandler;
-  private AdminEmployeeViewModel adminEmployeeViewModel;
+  private AdminUsersOverviewViewModel adminUsersOverviewViewModel;
 
   @FXML public Button logout;
   @FXML public Button add;
@@ -23,7 +23,7 @@ public class AdminEmployeeViewController implements ViewController
       ViewModelFactory viewModelFactory)
   {
     this.viewHandler = viewHandler;
-    adminEmployeeViewModel = viewModelFactory.getAdminViewModel();
+    adminUsersOverviewViewModel = viewModelFactory.getAdminViewModel();
   }
 
   public void onAdd(ActionEvent actionEvent)

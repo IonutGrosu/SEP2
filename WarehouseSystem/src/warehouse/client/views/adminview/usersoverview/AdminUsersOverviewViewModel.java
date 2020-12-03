@@ -1,4 +1,4 @@
-package warehouse.client.views.adminview.employees;
+package warehouse.client.views.adminview.usersoverview;
 
 import warehouse.client.model.WarehouseModel;
 import warehouse.shared.util.PropertyChangeSubject;
@@ -6,12 +6,12 @@ import warehouse.shared.util.PropertyChangeSubject;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class AdminEmployeeViewModel implements PropertyChangeSubject
+public class AdminUsersOverviewViewModel implements PropertyChangeSubject
 {
   private WarehouseModel warehouseModel;
   private PropertyChangeSupport support;
 
-  public AdminEmployeeViewModel(WarehouseModel warehouseModel)
+  public AdminUsersOverviewViewModel(WarehouseModel warehouseModel)
   {
     this.warehouseModel = warehouseModel;
   }
