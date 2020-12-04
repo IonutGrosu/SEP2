@@ -1,6 +1,7 @@
 package warehouse.server.model;
 
-import warehouse.persistence.LoginDAO;
+import warehouse.persistence.login.LoginDAO;
+import warehouse.persistence.login.LoginDAO;
 
 import java.beans.PropertyChangeListener;
 
@@ -16,6 +17,7 @@ public class ServerModelImpl implements ServerModel
   {
     this.loginDAO = loginDAO;
   }
+
 
   @Override
   public boolean checkCredentials(String username, String password) {
