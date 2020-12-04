@@ -1,5 +1,103 @@
 package warehouse.client.views.adminview.createuser;
 
-public class CreateUserViewModel
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
+import warehouse.client.model.WarehouseModel;
+import warehouse.shared.util.PropertyChangeSubject;
+
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
+public class CreateUserViewModel implements PropertyChangeSubject
 {
+
+  private WarehouseModel warehouseModel;
+  private PropertyChangeSupport support;
+  private StringProperty firstName, secondName, userName, password, role;
+  private StringProperty notification;
+
+  public CreateUserViewModel(WarehouseModel warehouseModel)
+  {
+    this.warehouseModel = warehouseModel;
+    support = new PropertyChangeSupport(this);
+    firstName = new SimpleStringProperty();
+    secondName = new SimpleStringProperty();
+    userName = new SimpleStringProperty();
+    password = new SimpleStringProperty();
+    role = new SimpleStringProperty();
+
+    warehouseModel.addPropertyListener("userCreation", this::userCreation);
+    warehouseModel.addPropertyListener("errorCreatingUser", this::displayError);
+    notification = new SimpleStringProperty();
+  }
+
+  private void displayError(PropertyChangeEvent propertyChangeEvent)
+  {
+    notification.setValue("Error when creating user");
+  }
+
+  private void userCreation(PropertyChangeEvent propertyChangeEvent)
+  {
+    // if user is added successfully to the database
+    notification.setValue("The user has been added");
+    support.firePropertyChange(propertyChangeEvent);
+  }
+
+  @Override public void addPropertyListener(String eventName,
+      PropertyChangeListener listener)
+  {
+    if (eventName == null)
+    {
+      support.addPropertyChangeListener(listener);
+    }
+    else
+    {
+      support.addPropertyChangeListener(eventName, listener);
+    }
+  }
+
+  public StringProperty getNotification()
+  {
+    return notification;
+  }
+
+  public StringProperty firstNameProperty()
+  {
+    return firstName;
+  }
+
+  public StringProperty secondNameProperty()
+  {
+    return secondName;
+  }
+
+  public StringProperty userNameProperty()
+  {
+    return userName;
+  }
+
+  public StringProperty passwordProperty()
+  {
+    return password;
+  }
+
+  public StringProperty roleProperty()
+  {
+    return role;
+  }
+
+  public void forwardUserProperties(String positon)
+  {
+    System.out.println(firstName.getValue());
+    System.out.println(secondName.getValue());
+    System.out.println(userName.getValue());
+    System.out.println(password.getValue());
+    System.out.println(positon);
+    warehouseModel
+        .setUserProperties(firstName.getValue(), secondName.getValue(),
+            userName.getValue(), password.getValue(), positon);
+
+  }
 }

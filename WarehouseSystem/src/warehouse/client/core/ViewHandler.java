@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import warehouse.client.views.adminview.createuser.CreateUserViewController;
 import warehouse.client.views.adminview.shopsoverview.AdminShopsOverviewViewController;
 import warehouse.client.views.adminview.usersoverview.AdminUsersOverviewViewController;
 import warehouse.client.views.loginview.LoginViewController;
@@ -16,6 +17,7 @@ public class ViewHandler
   private Stage stage;
   private Scene loginScene;
   private Scene adminScene;
+  private Scene createUser;
 //  private static Map<String, Scene> scenes;
 //  private static ArrayList<String> names;
 
@@ -76,6 +78,23 @@ public class ViewHandler
     stage.setTitle("Welcome Admin");
     stage.setScene(adminScene);
   }
+
+  public void openCreateUsersView()
+  {
+    FXMLLoader loader = new FXMLLoader();
+
+    if(createUser == null)
+    {
+      Parent root = getRootByPath("../views/adminview/createuser/CreateUser.fxml", loader);
+      CreateUserViewController controller = loader.getController();
+      controller.init(this, viewModelFactory);
+      createUser = new Scene(root);
+    }
+
+    stage.setTitle("Create user");
+    stage.setScene(createUser);
+  }
+
   public void openAdminShopsOverviewView()
   {
     FXMLLoader loader = new FXMLLoader();

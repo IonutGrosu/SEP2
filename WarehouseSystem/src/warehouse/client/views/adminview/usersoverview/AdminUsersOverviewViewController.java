@@ -7,6 +7,9 @@ import javafx.scene.control.ListView;
 import warehouse.client.core.ViewHandler;
 import warehouse.client.core.ViewModelFactory;
 import warehouse.client.views.ViewController;
+import warehouse.shared.transferObjects.User;
+
+import java.beans.PropertyChangeEvent;
 
 public class AdminUsersOverviewViewController implements ViewController
 {
@@ -23,12 +26,21 @@ public class AdminUsersOverviewViewController implements ViewController
       ViewModelFactory viewModelFactory)
   {
     this.viewHandler = viewHandler;
-    adminUsersOverviewViewModel = viewModelFactory.getAdminUsersOverviewViewModel();
+    adminUsersOverviewViewModel = viewModelFactory
+        .getAdminUsersOverviewViewModel();
+    adminUsersOverviewViewModel
+        .addPropertyListener("userCreated", this::addUser);
+  }
+
+  private void addUser(PropertyChangeEvent propertyChangeEvent)
+  {
+    listEmployees.getItems().add(propertyChangeEvent.getPropertyName());
+    //listEmployees.getItems().add(((User)propertyChangeEvent.getNewValue()).userName());
   }
 
   public void onAdd(ActionEvent actionEvent)
   {
-
+    viewHandler.openCreateUsersView();
   }
 
   public void onEdit(ActionEvent actionEvent)

@@ -3,6 +3,7 @@ package warehouse.client.views.adminview.usersoverview;
 import warehouse.client.model.WarehouseModel;
 import warehouse.shared.util.PropertyChangeSubject;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
@@ -14,15 +15,24 @@ public class AdminUsersOverviewViewModel implements PropertyChangeSubject
   public AdminUsersOverviewViewModel(WarehouseModel warehouseModel)
   {
     this.warehouseModel = warehouseModel;
+    support = new PropertyChangeSupport(this);
+    warehouseModel.addPropertyListener("userCreated", this::addUserToList);
+  }
+
+  private void addUserToList(PropertyChangeEvent propertyChangeEvent)
+  {
+    support.firePropertyChange(propertyChangeEvent);
   }
 
   @Override public void addPropertyListener(String eventName,
       PropertyChangeListener listener)
   {
-    if(eventName == null)
+    if (eventName == null)
     {
       support.addPropertyChangeListener(listener);
-    } else {
+    }
+    else
+    {
       support.addPropertyChangeListener(eventName, listener);
     }
   }
