@@ -2,6 +2,7 @@ package warehouse.client.networking;
 
 import warehouse.shared.networking.ClientCallback;
 import warehouse.shared.networking.RMIServer;
+import warehouse.shared.transferObjects.User;
 
 import java.awt.*;
 import java.beans.PropertyChangeListener;
@@ -30,32 +31,47 @@ public class RMIClientImpl implements Client, ClientCallback
       e.printStackTrace();
     }
     support = new PropertyChangeSupport(this);
-    Registry registry = null;
+    Registry registry;
     try
     {
       registry = LocateRegistry.getRegistry("localhost", 1099);
       rmiServer = (RMIServer)registry.lookup("Server");
       System.out.println("Client Connected");
     }
-    catch (RemoteException e)
-    {
-      e.printStackTrace();
-    }
-    catch (NotBoundException e)
+    catch (RemoteException | NotBoundException e)
     {
       e.printStackTrace();
     }
   }
+
   @Override public void login(String username, String password)
       throws RemoteException
   {
     System.out.println("Client Asks For Verification");
- b = rmiServer.getLoginServer().login(username, password);
+    b = rmiServer.getLoginServer().login(username, password);
+  }
+
+  @Override public void newUser(String firstName, String lastName,
+      String username, String password, String position)
+  {
+    try
+    {
+      rmiServer.getAdminServer().newUser(firstName, lastName, username, password, position);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
   }
 
   @Override public void loginResponse(boolean b)
   {
     support.firePropertyChange("loginResponse", null, b);
+  }
+
+  @Override public void createUserResponse(User user) throws RemoteException
+  {
+
   }
 
   @Override public void addPropertyListener(String eventName,

@@ -1,6 +1,10 @@
 package warehouse.server;
 
 import warehouse.client.networking.RMIClientImpl;
+import warehouse.persistence.LoginDAO;
+import warehouse.persistence.LoginDAOImpl;
+import warehouse.persistence.manageUser.ManageUserDAO;
+import warehouse.persistence.manageUser.ManageUserDAOImpl;
 import warehouse.persistence.login.LoginDAO;
 import warehouse.persistence.login.LoginDAOImpl;
 import warehouse.server.model.ServerModel;
@@ -20,7 +24,8 @@ public class RunServer
       throws RemoteException, AlreadyBoundException
   {
     LoginDAO loginDAO = LoginDAOImpl.getInstance();
-    ServerModel serverModel = new ServerModelImpl(loginDAO);
+    ManageUserDAO manageUserDAO = ManageUserDAOImpl.getInstance();
+    ServerModel serverModel = new ServerModelImpl(loginDAO, manageUserDAO);
     RMIServer server = new RMIServerImpl(serverModel);
     Registry registry = LocateRegistry.createRegistry(1099);
     System.out.println("Registry Created");

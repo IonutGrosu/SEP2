@@ -3,12 +3,16 @@ package warehouse.shared.transferObjects;
 public class User
 {
   private int id;
-  private UserType userType;
+  private String firstName;
+  private String lastName;
+  private String position;
 
-  public User(int id, UserType userType)
+  public User(int id, String firstName, String lastName, String position)
   {
     this.id = id;
-    this.userType = userType;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.position = position;
   }
 
   public int getId()
@@ -16,8 +20,18 @@ public class User
     return id;
   }
 
-  public UserType getUserType()
+  public String getFirstName()
   {
-    return userType;
+    return firstName;
+  }
+
+  public String getLastName()
+  {
+    return lastName;
+  }
+
+  public String getPosition()
+  {
+    return position;
   }
 }

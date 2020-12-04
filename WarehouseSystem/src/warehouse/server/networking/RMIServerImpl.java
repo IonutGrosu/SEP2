@@ -29,9 +29,13 @@ public class RMIServerImpl implements RMIServer
     return new LoginServerImpl(serverModel);
   }
 
+  @Override public warehouse.shared.networking.AdminServer getAdminServer()
+      throws RemoteException
+  {
+    return new AdminServerImpl(serverModel);
+  }
 
-
-//  public void registerClient(ClientCallback client)
+  //  public void registerClient(ClientCallback client)
 //  {
 //    PropertyChangeListener listener = new PropertyChangeListener()
 //    {
