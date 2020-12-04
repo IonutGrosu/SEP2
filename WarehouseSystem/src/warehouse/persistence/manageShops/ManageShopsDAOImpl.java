@@ -62,7 +62,7 @@ public class ManageShopsDAOImpl implements ManageShopsDAO
 
   }
 
-  @Override public boolean createShop(int id, String city, String street)
+  @Override public boolean createShop(String city, String street)
   {
     if (checkIfShopExists(city, street)){
       return false;
@@ -71,9 +71,9 @@ public class ManageShopsDAOImpl implements ManageShopsDAO
       try (Connection connection = jdbcController.getConnection();)
       {
         PreparedStatement statement = connection
-            .prepareStatement("INSERT INTO shops VALUES (default, ?, ?)");
-        statement.setString(2, city);
-        statement.setString(3, street);
+            .prepareStatement("INSERT INTO shops VALUES (?, ?)");
+        statement.setString(1, city);
+        statement.setString(2, street);
         System.out.println(statement);
         ResultSet resultSet = statement.executeQuery();
 
