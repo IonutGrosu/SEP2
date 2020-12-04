@@ -88,16 +88,11 @@ public class CreateUserViewModel implements PropertyChangeSubject
     return role;
   }
 
-  public void forwardUserProperties(String positon)
+  public void forwardUserProperties(String position)
   {
-    System.out.println(firstName.getValue());
-    System.out.println(secondName.getValue());
-    System.out.println(userName.getValue());
-    System.out.println(password.getValue());
-    System.out.println(positon);
     warehouseModel
         .setUserProperties(firstName.getValue(), secondName.getValue(),
-            userName.getValue(), password.getValue(), positon);
+            userName.getValue(), password.getValue(), position);
 
   }
 }
