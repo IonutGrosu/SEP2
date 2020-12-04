@@ -28,11 +28,6 @@ public class WarehouseModelImpl implements WarehouseModel
     client.addPropertyListener(EventType.SUCCESSFUL_SHOP_CREATION.toString(), this::createShopResponse);
   }
 
-  private void createShopResponse(PropertyChangeEvent propertyChangeEvent) {
-    support.firePropertyChange(propertyChangeEvent);
-    client.addPropertyListener("userCreated", this::addCreatedUserToList);
-  }
-
   private void addCreatedUserToList(PropertyChangeEvent propertyChangeEvent)
   {
     support.firePropertyChange(propertyChangeEvent);
@@ -72,6 +67,11 @@ public class WarehouseModelImpl implements WarehouseModel
   @Override
   public void createShop(String city, String street) {
 
+  }
+
+  private void createShopResponse(PropertyChangeEvent event) {
+    support.firePropertyChange(event);
+    client.addPropertyListener("userCreated", this::addCreatedUserToList);
   }
 
   @Override public void setUserProperties(String firstName, String lastName,

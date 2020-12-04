@@ -2,7 +2,6 @@ package warehouse.client.views.adminview.createshop;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ObservableValue;
 import warehouse.client.model.WarehouseModel;
 import warehouse.shared.transferObjects.EventType;
 import warehouse.shared.util.PropertyChangeSubject;
@@ -42,11 +41,11 @@ public class CreateShopViewModel implements PropertyChangeSubject {
     }
 
     public StringProperty getResponseLabelProperty() {
-        return null;
+        return responseLabelProperty;
     }
 
     @Override
     public void addPropertyListener(String eventName, PropertyChangeListener listener) {
-
+        support.addPropertyChangeListener(eventName, listener);
     }
 }
