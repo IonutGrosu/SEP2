@@ -10,7 +10,7 @@ public class ManageShopsDAOImpl implements ManageShopsDAO
   private static ManageShopsDAOImpl instance;
   private JDBCController jdbcController;
 
-  public ManageShopsDAOImpl()
+  private ManageShopsDAOImpl()
   {
     try
     {
@@ -33,7 +33,7 @@ public class ManageShopsDAOImpl implements ManageShopsDAO
     return instance;
   }
 
-  @Override public boolean checkIfShopExists(int id, String city, String street)
+  @Override public boolean checkIfShopExists(String city, String street)
   {
     boolean doesShopExist = false;
     try (Connection connection = jdbcController.getConnection();)
@@ -64,15 +64,14 @@ public class ManageShopsDAOImpl implements ManageShopsDAO
 
   @Override public boolean createShop(int id, String city, String street)
   {
-    if (checkIfShopExists(id, city, street)){
+    if (checkIfShopExists(city, street)){
       return false;
     }
     else {
       try (Connection connection = jdbcController.getConnection();)
       {
         PreparedStatement statement = connection
-            .prepareStatement("INSERT INTO shops VALUES (?, ?, ?)");
-        statement.setInt(1, id);
+            .prepareStatement("INSERT INTO shops VALUES (default, ?, ?)");
         statement.setString(2, city);
         statement.setString(3, street);
         System.out.println(statement);
