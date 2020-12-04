@@ -1,6 +1,7 @@
 package warehouse.client.model;
 
 import warehouse.client.networking.Client;
+import warehouse.shared.transferObjects.EventType;
 import warehouse.shared.transferObjects.User;
 import warehouse.shared.transferObjects.UserType;
 
@@ -20,8 +21,15 @@ public class WarehouseModelImpl implements WarehouseModel
   {
     this.client = client;
     support = new PropertyChangeSupport(this);
+    //response for login
     client.addPropertyListener("loginResponse", this::loginResponse);
     client.addPropertyListener("errorResponse", this::loginResponse);
+    //response for creation of shop --Ionut
+    client.addPropertyListener(EventType.SUCCESSFUL_SHOP_CREATION.toString(), this::createShopResponse);
+  }
+
+  private void createShopResponse(PropertyChangeEvent propertyChangeEvent) {
+    support.firePropertyChange(propertyChangeEvent);
     client.addPropertyListener("userCreated", this::addCreatedUserToList);
   }
 
@@ -34,19 +42,19 @@ public class WarehouseModelImpl implements WarehouseModel
   private void loginResponse(PropertyChangeEvent propertyChangeEvent)
   {
     support.firePropertyChange(propertyChangeEvent);
-    //    user = (User) propertyChangeEvent.getNewValue();
-    //    switch (user.getUserType())
-    //    {
-    //      case MANAGER :
-    //        support.firePropertyChange("MANAGER", null, user);
-    //        break;
-    //      case EMPLOYEE:
-    //        support.firePropertyChange("EMPLOYEE", null, user);
-    //        break;
-    //      case ADMIN:
-    //        support.firePropertyChange("ADMIN", null, user);
-    //        break;
-    //    }
+//    user = (User) propertyChangeEvent.getNewValue();
+//    switch (user.getUserType())
+//    {
+//      case MANAGER :
+//        support.firePropertyChange("MANAGER", null, user);
+//        break;
+//      case EMPLOYEE:
+//        support.firePropertyChange("EMPLOYEE", null, user);
+//        break;
+//      case ADMIN:
+//        support.firePropertyChange("ADMIN", null, user);
+//        break;
+//    }
   }
 
   @Override public void login(String username, String password)
@@ -59,6 +67,11 @@ public class WarehouseModelImpl implements WarehouseModel
     {
       e.printStackTrace();
     }
+  }
+
+  @Override
+  public void createShop(String city, String street) {
+
   }
 
   @Override public void setUserProperties(String firstName, String lastName,

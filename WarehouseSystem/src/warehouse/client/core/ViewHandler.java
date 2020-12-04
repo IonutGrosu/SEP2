@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import warehouse.client.views.adminview.createshop.CreateShopViewController;
 import warehouse.client.views.adminview.createuser.CreateUserViewController;
 import warehouse.client.views.adminview.shopsoverview.AdminShopsOverviewViewController;
 import warehouse.client.views.adminview.usersoverview.AdminUsersOverviewViewController;
@@ -17,6 +18,7 @@ public class ViewHandler
   private Stage stage;
   private Scene loginScene;
   private Scene adminScene;
+  private Scene createShopScene;
   private Scene createUser;
 //  private static Map<String, Scene> scenes;
 //  private static ArrayList<String> names;
@@ -27,9 +29,6 @@ public class ViewHandler
   {
     this.stage = stage;
     this.viewModelFactory = viewModelFactory;
-//    scenes = new HashMap<>();
-//    names = new ArrayList<>();
-//    names.add("LoginView");
   }
 
   private Parent getRootByPath(String path, FXMLLoader loader)
@@ -109,6 +108,21 @@ public class ViewHandler
 
     stage.setTitle("Welcome Admin");
     stage.setScene(adminScene);
+  }
+
+  public void openAdminCreateShopView() {
+    FXMLLoader loader = new FXMLLoader();
+
+    if (createShopScene == null)
+    {
+        Parent root = getRootByPath("../views/adminview/createshop/CreateShop.fxml", loader);
+        CreateShopViewController controller = loader.getController();
+        controller.init(this, viewModelFactory);
+        createShopScene = new Scene(root);
+    }
+
+    stage.setTitle("Create shop");
+    stage.setScene(createShopScene);
   }
 
   public void start()

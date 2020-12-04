@@ -2,9 +2,9 @@ package warehouse.client.model;
 
 import warehouse.shared.util.PropertyChangeSubject;
 
-public interface WarehouseModel extends PropertyChangeSubject
-{
-  void login(String username, String password);
-  void setUserProperties(String firstName, String lastName, String username,
+public interface WarehouseModel extends PropertyChangeSubject {
+    void login(String username, String password);
+    void createShop(String city, String street);
+    void setUserProperties(String firstName, String lastName, String username,
       String password, String position);
 }
