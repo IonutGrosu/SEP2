@@ -1,4 +1,4 @@
-package warehouse.persistence;
+package warehouse.persistence.login;
 
 public interface LoginDAO {
     boolean checkCredentials(String username, String password);

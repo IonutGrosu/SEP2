@@ -1,8 +1,11 @@
-package warehouse.persistence;
+package warehouse.persistence.login;
+
+import warehouse.persistence.JDBCController;
 
 import java.sql.*;
 
-public class LoginDAOImpl implements LoginDAO {
+public class LoginDAOImpl implements LoginDAO
+{
     private static LoginDAOImpl instance;
     private JDBCController jdbcController;
 

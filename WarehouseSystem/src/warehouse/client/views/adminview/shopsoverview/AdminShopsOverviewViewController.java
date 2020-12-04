@@ -23,22 +23,27 @@ public class AdminShopsOverviewViewController implements ViewController
       ViewModelFactory viewModelFactory)
   {
     this.viewHandler = viewHandler;
-    adminShopsOverviewViewModel = viewModelFactory.getAdminShopsOverviewViewModel();
+    adminShopsOverviewViewModel = viewModelFactory
+        .getAdminShopsOverviewViewModel();
   }
+
   public void onUserOverview(ActionEvent actionEvent)
   {
-  viewHandler.openAdminShopsOverviewView();
+    viewHandler.openAdminShopsOverviewView();
   }
+
   public void onLogout(ActionEvent actionEvent)
   {
-
+    viewHandler.openLoginView();
   }
+
   public void onAddShop(ActionEvent actionEvent)
   {
-
+    // viewHandler. <-- createShop view
   }
+
   public void onRemoveShop(ActionEvent actionEvent)
   {
-
   }
+
 }
