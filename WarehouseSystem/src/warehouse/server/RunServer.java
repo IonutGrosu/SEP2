@@ -1,8 +1,6 @@
 package warehouse.server;
 
 import warehouse.client.networking.RMIClientImpl;
-import warehouse.persistence.LoginDAO;
-import warehouse.persistence.LoginDAOImpl;
 import warehouse.persistence.manageUser.ManageUserDAO;
 import warehouse.persistence.manageUser.ManageUserDAOImpl;
 import warehouse.persistence.login.LoginDAO;

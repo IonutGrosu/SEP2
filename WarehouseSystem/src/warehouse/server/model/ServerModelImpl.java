@@ -33,12 +33,12 @@ public class ServerModelImpl implements ServerModel
     boolean userExists = manageUserDAO.checkNewUser(username);
     if(userExists)
     {
-      support.firePropertyChange("errorCreatingUser", null, null);
+      support.firePropertyChange("errorCreatingUser", username, null);
     }
     else
     {
       int id = manageUserDAO.createUser(firstName, lastName, username, password, position);
-      support.firePropertyChange("userCreated", null, new User(id, firstName, lastName, position));
+      support.firePropertyChange("userCreated", username, new User(id, firstName, lastName, position));
     }
   }
 

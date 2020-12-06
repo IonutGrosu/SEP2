@@ -56,7 +56,7 @@ public class RMIClientImpl implements Client, ClientCallback
   {
     try
     {
-      rmiServer.getAdminServer().newUser(firstName, lastName, username, password, position);
+      rmiServer.getAdminServer().newUser(firstName, lastName, username, password, position, this);
     }
     catch (RemoteException e)
     {
@@ -69,9 +69,14 @@ public class RMIClientImpl implements Client, ClientCallback
     support.firePropertyChange("loginResponse", null, b);
   }
 
-  @Override public void createUserResponse(User user) throws RemoteException
+  @Override public void successCreateUserResponse(User user)
   {
+    support.firePropertyChange("userCreated",null,user);
+  }
 
+  @Override public void errorCreateUserResponse()
+  {
+    support.firePropertyChange("errorCreatingUser", null, null);
   }
 
   @Override public void addPropertyListener(String eventName,

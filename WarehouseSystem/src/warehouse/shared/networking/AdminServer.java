@@ -5,6 +5,6 @@ import java.rmi.RemoteException;
 
 public interface AdminServer extends Remote
 {
-  void newUser(String firstName, String lastName, String username, String password, String position) throws
-      RemoteException;
+  void newUser(String firstName, String lastName, String username, String password,
+      String position, ClientCallback clientCallback) throws RemoteException;
 }
