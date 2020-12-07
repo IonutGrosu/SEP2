@@ -51,7 +51,27 @@ public class ManageUserDAOImpl implements ManageUserDAO
   @Override public int createUser(String firstName, String lastName,
       String username, String password, String position)
   {
-    int id;
-    return 1;
+    try (Connection connection = jdbcController.getConnection())
+    {
+      PreparedStatement statement =
+          connection.prepareStatement("INSERT INTO users(firstName,lastName,username,password,position) values (?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+      statement.setString(1, firstName);
+      statement.setString(2, lastName);
+      statement.setString(3, username);
+      statement.setString(4, password);
+      statement.setString(5, position);
+      System.out.println(statement);
+      statement.executeUpdate();
+      ResultSet keys = statement.getGeneratedKeys();
+      if(keys.next())
+      {
+        return keys.getInt(1);
+      }
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return -1;
   }
 }

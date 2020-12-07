@@ -85,9 +85,9 @@ public class RMIClientImpl implements Client, ClientCallback
     support.firePropertyChange("userCreated",null,user);
   }
 
-  @Override public void errorCreateUserResponse()
+  @Override public void errorCreateUserResponse(String eventName)
   {
-    support.firePropertyChange("errorCreatingUser", null, null);
+    support.firePropertyChange(eventName, null, null);
   }
 
   @Override

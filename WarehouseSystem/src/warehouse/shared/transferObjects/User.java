@@ -34,4 +34,9 @@ public class User
   {
     return position;
   }
+
+  public String toString()
+  {
+    return id + " - " + firstName + " " + lastName + " - " + position;
+  }
 }

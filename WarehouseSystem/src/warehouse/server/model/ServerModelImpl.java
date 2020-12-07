@@ -26,7 +26,6 @@ public class ServerModelImpl implements ServerModel
     support = new PropertyChangeSupport(this);
   }
 
-
   @Override
   public boolean checkCredentials(String username, String password) {
     return loginDAO.checkCredentials(username, password);
@@ -38,12 +37,20 @@ public class ServerModelImpl implements ServerModel
     boolean userExists = manageUserDAO.checkNewUser(username);
     if(userExists)
     {
-      support.firePropertyChange("errorCreatingUser", username, null);
+      support.firePropertyChange("alreadyExistingUsername", username, null);
     }
     else
     {
-      int id = manageUserDAO.createUser(firstName, lastName, username, password, position);
-      support.firePropertyChange("userCreated", username, new User(id, firstName, lastName, position));
+      int id = -1;
+      id = manageUserDAO.createUser(firstName, lastName, username, password, position);
+      if(id != -1)
+      {
+        support.firePropertyChange("userCreated", username, new User(id, firstName, lastName, position));
+      }
+      else
+      {
+        support.firePropertyChange("errorCreatingUserInDatabase", username, null);
+      }
     }
   }
 

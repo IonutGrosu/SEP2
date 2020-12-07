@@ -34,7 +34,8 @@ public class AdminUsersOverviewViewController implements ViewController
 
   private void addUser(PropertyChangeEvent propertyChangeEvent)
   {
-    listEmployees.getItems().add(propertyChangeEvent.getPropertyName());
+//    listEmployees.getItems().add(propertyChangeEvent.getPropertyName());
+    listEmployees.getItems().add(propertyChangeEvent.getNewValue().toString());
     //listEmployees.getItems().add(((User)propertyChangeEvent.getNewValue()).userName());
   }
 

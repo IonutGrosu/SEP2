@@ -28,21 +28,22 @@ public class CreateUserViewModel implements PropertyChangeSubject
     password = new SimpleStringProperty();
     role = new SimpleStringProperty();
 
-    warehouseModel.addPropertyListener("userCreation", this::userCreation);
-    warehouseModel.addPropertyListener("errorCreatingUser", this::displayError);
+    warehouseModel.addPropertyListener("userCreated", this::userCreation);
+    warehouseModel.addPropertyListener("alreadyExistingUsername", this::displayError);
+    warehouseModel.addPropertyListener("errorCreatingUserInDatabase", this::displayError);
     notification = new SimpleStringProperty();
   }
 
   private void displayError(PropertyChangeEvent propertyChangeEvent)
   {
-    notification.setValue("Error when creating user");
+    notification.setValue(propertyChangeEvent.getPropertyName());
   }
 
   private void userCreation(PropertyChangeEvent propertyChangeEvent)
   {
     // if user is added successfully to the database
     notification.setValue("The user has been added");
-    support.firePropertyChange(propertyChangeEvent);
+//    support.firePropertyChange(propertyChangeEvent);
   }
 
   @Override public void addPropertyListener(String eventName,

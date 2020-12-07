@@ -25,9 +25,18 @@ public class WarehouseModelImpl implements WarehouseModel
     //response for login
     client.addPropertyListener("loginResponse", this::loginResponse);
     client.addPropertyListener("errorResponse", this::loginResponse);
+    //response for admin creating user -- Claudiu
+    client.addPropertyListener("alreadyExistingUsername", this::createUserResponse);
+    client.addPropertyListener("userCreated", this::createUserResponse);
+    client.addPropertyListener("errorCreatingUserInDatabase", this::createUserResponse);
     //response for creation of shop --Ionut
     client.addPropertyListener(EventType.SUCCESSFUL_SHOP_CREATION.toString(), this::createShopResponse);
     client.addPropertyListener(EventType.UNSUCCESSFUL_SHOP_CREATION.toString(), this::createShopResponse);
+  }
+
+  private void createUserResponse(PropertyChangeEvent propertyChangeEvent)
+  {
+    support.firePropertyChange(propertyChangeEvent);
   }
 
   private void addCreatedUserToList(PropertyChangeEvent propertyChangeEvent)

@@ -33,7 +33,8 @@ public class AdminServerImpl implements AdminServer
     this.serverModel = serverModel;
     support = new PropertyChangeSupport(this);
     serverModel.addPropertyListener("userCreated", this::createUserResponse);
-    serverModel.addPropertyListener("errorCreatingUser", this::createUserResponse);
+    serverModel.addPropertyListener("alreadyExistingUsername", this::createUserResponse);
+    serverModel.addPropertyListener("errorCreatingUserInDatabase", this::createUserResponse);
 
     serverModel.addPropertyListener(EventType.SUCCESSFUL_SHOP_CREATION.toString(), this::createShopResponse);
     serverModel.addPropertyListener(EventType.UNSUCCESSFUL_SHOP_CREATION.toString(), this::createShopResponse);
@@ -58,13 +59,12 @@ public class AdminServerImpl implements AdminServer
           e.printStackTrace();
         }
       }
-      else
-      {
-        if(set.getKey().equals(username) && eventName.equals("errorCreatingUser"))
+
+      if(set.getKey().equals(username) && (eventName.equals("alreadyExistingUsername") || eventName.equals("errorCreatingUserInDatabase")))
         {
           try
           {
-            set.getValue().errorCreateUserResponse();
+            set.getValue().errorCreateUserResponse(eventName);
             hashMap.remove(set.getKey());
             break;
           }
@@ -73,7 +73,7 @@ public class AdminServerImpl implements AdminServer
             e.printStackTrace();
           }
         }
-      }
+
     }
   }
 
