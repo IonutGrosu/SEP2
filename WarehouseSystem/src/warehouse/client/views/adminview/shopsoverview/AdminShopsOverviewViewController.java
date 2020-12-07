@@ -1,5 +1,6 @@
 package warehouse.client.views.adminview.shopsoverview;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -27,23 +28,23 @@ public class AdminShopsOverviewViewController implements ViewController
         .getAdminShopsOverviewViewModel();
   }
 
-  public void onUserOverview(ActionEvent actionEvent)
-  {
-    viewHandler.openAdminShopsOverviewView();
-  }
+
 
   public void onLogout(ActionEvent actionEvent)
   {
-    viewHandler.openLoginView();
+    //viewHandler.openLoginView();
   }
 
   public void onAddShop(ActionEvent actionEvent)
   {
-    // viewHandler. <-- createShop view
+    viewHandler.openAdminCreateShopView();
   }
 
   public void onRemoveShop(ActionEvent actionEvent)
   {
   }
 
+  public void onUserOverview(ActionEvent actionEvent) {
+    viewHandler.openAdminUsersOverviewView();
+  }
 }

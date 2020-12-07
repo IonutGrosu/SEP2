@@ -55,6 +55,7 @@ public class LoginViewController implements ViewController {
 
     private void openView(PropertyChangeEvent propertyChangeEvent)
     {
+
         switch (propertyChangeEvent.getPropertyName())
         {
             case "MANAGER" :
@@ -85,6 +86,7 @@ public class LoginViewController implements ViewController {
     @FXML
     public void sendCredentials()
     {
+        viewHandler.openAdminUsersOverviewView();//testing purposes, delete this when implementing the full login system
         if (usernameId != null && passwordId != null)
         loginViewModel.sendCredentials(usernameId.getText(), passwordId.getText());
     }

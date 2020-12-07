@@ -17,13 +17,10 @@ public class ViewHandler
   private ViewModelFactory viewModelFactory;
   private Stage stage;
   private Scene loginScene;
-  private Scene adminScene;
-  private Scene createShopScene;
-  private Scene createUser;
-//  private static Map<String, Scene> scenes;
-//  private static ArrayList<String> names;
-
-  // Flyweight for the scenes, rocket science
+  private Scene adminShopsOverviewScene;
+  private Scene adminUsersOverviewScene;
+  private Scene adminCreateShopScene;
+  private Scene adminCreateUserScene;
 
   public ViewHandler(Stage stage, ViewModelFactory viewModelFactory)
   {
@@ -66,68 +63,68 @@ public class ViewHandler
   {
     FXMLLoader loader = new FXMLLoader();
 
-    if(adminScene == null)
+    if(adminUsersOverviewScene == null)
     {
       Parent root = getRootByPath("../views/adminview/usersoverview/adminUsersOverview.fxml", loader);
       AdminUsersOverviewViewController controller = loader.getController();
       controller.init(this, viewModelFactory);
-      adminScene = new Scene(root);
+      adminUsersOverviewScene = new Scene(root);
     }
 
-    stage.setTitle("Welcome Admin");
-    stage.setScene(adminScene);
+    stage.setTitle("Users overview");
+    stage.setScene(adminUsersOverviewScene);
   }
 
   public void openCreateUsersView()
   {
     FXMLLoader loader = new FXMLLoader();
 
-    if(createUser == null)
+    if(adminCreateUserScene == null)
     {
       Parent root = getRootByPath("../views/adminview/createuser/CreateUser.fxml", loader);
       CreateUserViewController controller = loader.getController();
       controller.init(this, viewModelFactory);
-      createUser = new Scene(root);
+      adminCreateUserScene = new Scene(root);
     }
 
     stage.setTitle("Create user");
-    stage.setScene(createUser);
+    stage.setScene(adminCreateUserScene);
   }
 
   public void openAdminShopsOverviewView()
   {
     FXMLLoader loader = new FXMLLoader();
 
-    if(adminScene == null)
+    if(adminShopsOverviewScene == null)
     {
       Parent root = getRootByPath("../views/adminview/shopsoverview/adminShopsOverview.fxml", loader);
      AdminShopsOverviewViewController controller = loader.getController();
       controller.init(this, viewModelFactory);
-      adminScene = new Scene(root);
+      adminShopsOverviewScene = new Scene(root);
     }
 
-    stage.setTitle("Welcome Admin");
-    stage.setScene(adminScene);
+    stage.setTitle("Shops overview");
+    stage.setScene(adminShopsOverviewScene);
   }
 
   public void openAdminCreateShopView() {
     FXMLLoader loader = new FXMLLoader();
 
-    if (createShopScene == null)
+    if (adminCreateShopScene == null)
     {
         Parent root = getRootByPath("../views/adminview/createshop/CreateShop.fxml", loader);
         CreateShopViewController controller = loader.getController();
         controller.init(this, viewModelFactory);
-        createShopScene = new Scene(root);
+      adminCreateShopScene = new Scene(root);
     }
 
     stage.setTitle("Create shop");
-    stage.setScene(createShopScene);
+    stage.setScene(adminCreateShopScene);
   }
 
   public void start()
   {
-    openAdminUsersOverviewView();
+    openLoginView();
     stage.show();
   }
 

@@ -23,8 +23,9 @@
       </HBox>
       <HBox layoutX="1.0" layoutY="1.0" prefHeight="45.0" prefWidth="600.0">
          <children>
-            <Button fx:id="logout" mnemonicParsing="false" onAction="#onLogout" prefHeight="44.0" prefWidth="66.0" text="Logout" />
-            <Button fx:id="goToUserOverview" mnemonicParsing="false" onAction="#onUserOverview" prefHeight="44.0" prefWidth="129.0" text="Go to user overview" />
+            <Button fx:id="goToUserOverview" mnemonicParsing="false" onAction="#onUserOverview" prefHeight="44.0" prefWidth="150.0" text="Users Overview" />
+            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="150.0" text="Shops Overview" />
+            <Button fx:id="logout" mnemonicParsing="false" onAction="#onLogout" prefHeight="44.0" prefWidth="150.0" text="Logout" />
          </children></HBox>
    </children>
 </AnchorPane>

@@ -1,5 +1,6 @@
 package warehouse.client.views.adminview.createuser;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
@@ -73,4 +74,7 @@ public class CreateUserViewController implements ViewController
   {
     viewHandler.openAdminShopsOverviewView();
   }
+
+    public void onLogout() {
+    }
 }

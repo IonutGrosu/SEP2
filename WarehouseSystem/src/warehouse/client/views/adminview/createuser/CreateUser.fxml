@@ -13,8 +13,9 @@
    <children>
       <HBox layoutX="-8.0" prefHeight="45.0" prefWidth="608.0">
          <children>
-            <Button fx:id="usersOverview" mnemonicParsing="false" onAction="#onUsersOverview" prefHeight="44.0" prefWidth="134.0" text="Users Overview" />
-            <Button fx:id="shops" mnemonicParsing="false" onAction="#onShops" prefHeight="44.0" prefWidth="109.0" text="Shops" />
+            <Button fx:id="usersOverview" mnemonicParsing="false" onAction="#onUsersOverview" prefHeight="44.0" prefWidth="150.0" text="Users Overview" />
+            <Button fx:id="shops" mnemonicParsing="false" onAction="#onShops" prefHeight="44.0" prefWidth="150.0" text="Shops Overview" />
+            <Button mnemonicParsing="false" onAction="#onLogout" prefHeight="44.0" prefWidth="150.0" text="Logout" />
          </children>
       </HBox>
       <VBox layoutX="293.0" layoutY="97.0" prefHeight="200.0" prefWidth="124.0">

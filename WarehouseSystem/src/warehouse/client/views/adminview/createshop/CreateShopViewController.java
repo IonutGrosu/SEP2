@@ -1,6 +1,6 @@
 package warehouse.client.views.adminview.createshop;
 
-import javafx.event.ActionEvent;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -68,5 +68,9 @@ public class CreateShopViewController implements ViewController {
         if (!imputedStreet.isEmpty() && !imputedCity.isEmpty()) {
             viewModel.createShop(imputedCity, imputedStreet);
         }
+    }
+
+    public void onUsersOverview() {
+        viewHandler.openAdminUsersOverviewView();
     }
 }

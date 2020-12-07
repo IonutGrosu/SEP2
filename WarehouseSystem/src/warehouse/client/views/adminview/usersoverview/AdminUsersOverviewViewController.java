@@ -1,5 +1,6 @@
 package warehouse.client.views.adminview.usersoverview;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -26,10 +27,8 @@ public class AdminUsersOverviewViewController implements ViewController
       ViewModelFactory viewModelFactory)
   {
     this.viewHandler = viewHandler;
-    adminUsersOverviewViewModel = viewModelFactory
-        .getAdminUsersOverviewViewModel();
-    adminUsersOverviewViewModel
-        .addPropertyListener("userCreated", this::addUser);
+    adminUsersOverviewViewModel = viewModelFactory.getAdminUsersOverviewViewModel();
+    adminUsersOverviewViewModel.addPropertyListener("userCreated", this::addUser);
   }
 
   private void addUser(PropertyChangeEvent propertyChangeEvent)
@@ -59,4 +58,7 @@ public class AdminUsersOverviewViewController implements ViewController
 
   }
 
+  public void onShopsOverview() {
+    viewHandler.openAdminShopsOverviewView();
+  }
 }
