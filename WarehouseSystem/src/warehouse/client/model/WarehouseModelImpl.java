@@ -16,6 +16,7 @@ public class WarehouseModelImpl implements WarehouseModel
   private PropertyChangeSupport support;
   private boolean temporaryBoolean;
   private User user;
+  private String clientUsernameId;
 
   public WarehouseModelImpl(Client client)
   {
@@ -26,6 +27,7 @@ public class WarehouseModelImpl implements WarehouseModel
     client.addPropertyListener("errorResponse", this::loginResponse);
     //response for creation of shop --Ionut
     client.addPropertyListener(EventType.SUCCESSFUL_SHOP_CREATION.toString(), this::createShopResponse);
+    client.addPropertyListener(EventType.UNSUCCESSFUL_SHOP_CREATION.toString(), this::createShopResponse);
   }
 
   private void addCreatedUserToList(PropertyChangeEvent propertyChangeEvent)
@@ -54,6 +56,7 @@ public class WarehouseModelImpl implements WarehouseModel
 
   @Override public void login(String username, String password)
   {
+    clientUsernameId = username;
     try
     {
       client.login(username, password);
@@ -66,12 +69,12 @@ public class WarehouseModelImpl implements WarehouseModel
 
   @Override
   public void createShop(String city, String street) {
-
+    client.createShop(city, street, clientUsernameId);
   }
 
   private void createShopResponse(PropertyChangeEvent event) {
     support.firePropertyChange(event);
-    client.addPropertyListener("userCreated", this::addCreatedUserToList);
+    client.addPropertyListener("userCreated", this::addCreatedUserToList);//TODO ask Maria what this is
   }
 
   @Override public void setUserProperties(String firstName, String lastName,

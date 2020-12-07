@@ -20,7 +20,7 @@ public class RMIServerImpl implements RMIServer
 
   public RMIServerImpl(ServerModel serverModel) throws RemoteException
   {
-    UnicastRemoteObject.exportObject(this, 0);
+    UnicastRemoteObject.exportObject(this, 1099);
     this.serverModel = serverModel;
   }
 

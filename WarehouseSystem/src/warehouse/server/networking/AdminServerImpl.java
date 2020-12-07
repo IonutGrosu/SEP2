@@ -2,7 +2,9 @@ package warehouse.server.networking;
 
 import warehouse.server.model.ServerModel;
 import warehouse.shared.networking.AdminServer;
+import warehouse.shared.transferObjects.EventType;
 import warehouse.shared.networking.ClientCallback;
+import warehouse.shared.transferObjects.Shop;
 import warehouse.shared.transferObjects.User;
 
 import java.beans.PropertyChangeEvent;
@@ -32,6 +34,9 @@ public class AdminServerImpl implements AdminServer
     support = new PropertyChangeSupport(this);
     serverModel.addPropertyListener("userCreated", this::createUserResponse);
     serverModel.addPropertyListener("errorCreatingUser", this::createUserResponse);
+
+    serverModel.addPropertyListener(EventType.SUCCESSFUL_SHOP_CREATION.toString(), this::createShopResponse);
+    serverModel.addPropertyListener(EventType.UNSUCCESSFUL_SHOP_CREATION.toString(), this::createShopResponse);
   }
 
   private void createUserResponse(PropertyChangeEvent propertyChangeEvent)
@@ -77,5 +82,43 @@ public class AdminServerImpl implements AdminServer
   {
     hashMap.put(username, clientCallback);
     serverModel.newUser(firstName, lastName, username, password, position);
+  }
+
+  @Override
+  public void createShop(String city, String street, String clientId, ClientCallback clientCallback) {
+    hashMap.put(clientId, clientCallback);
+    serverModel.createShop(city, street, clientId);
+  }
+
+  private void createShopResponse(PropertyChangeEvent event){
+
+    String clientId = (String) event.getOldValue();
+    Shop createdShop = (Shop) event.getNewValue();
+    EventType eventType = null;
+    if (event.getPropertyName().equals(EventType.UNSUCCESSFUL_SHOP_CREATION.toString()))
+      eventType = EventType.UNSUCCESSFUL_SHOP_CREATION;
+    else if (event.getPropertyName().equals(EventType.SUCCESSFUL_SHOP_CREATION.toString()))
+      eventType = EventType.SUCCESSFUL_SHOP_CREATION;
+
+    for (Map.Entry<String, ClientCallback> entry : hashMap.entrySet()) {
+      String key = entry.getKey();
+      ClientCallback clientCallback = entry.getValue();
+      // ...
+      if (key.equals(clientId))
+        if (eventType.equals(EventType.SUCCESSFUL_SHOP_CREATION)) {
+          try {
+            clientCallback.successCreateShopResponse(createdShop);
+          } catch (RemoteException e) {
+            e.printStackTrace();
+          }
+        }
+        else if (eventType.equals(EventType.UNSUCCESSFUL_SHOP_CREATION)) {
+          try {
+            clientCallback.errorCreateShopResponse();
+          } catch (RemoteException e) {
+            e.printStackTrace();
+          }
+        }
+    }
   }
 }

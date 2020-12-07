@@ -2,6 +2,8 @@ package warehouse.client.networking;
 
 import warehouse.shared.networking.ClientCallback;
 import warehouse.shared.networking.RMIServer;
+import warehouse.shared.transferObjects.EventType;
+import warehouse.shared.transferObjects.Shop;
 import warehouse.shared.transferObjects.User;
 
 import java.awt.*;
@@ -64,6 +66,15 @@ public class RMIClientImpl implements Client, ClientCallback
     }
   }
 
+  @Override
+  public void createShop(String city, String street, String clientId) {
+    try {
+      rmiServer.getAdminServer().createShop(city, street, clientId ,this);
+    } catch (RemoteException e) {
+      e.printStackTrace();
+    }
+  }
+
   @Override public void loginResponse(boolean b)
   {
     support.firePropertyChange("loginResponse", null, b);
@@ -77,6 +88,16 @@ public class RMIClientImpl implements Client, ClientCallback
   @Override public void errorCreateUserResponse()
   {
     support.firePropertyChange("errorCreatingUser", null, null);
+  }
+
+  @Override
+  public void successCreateShopResponse(Shop shop) throws RemoteException {
+    support.firePropertyChange(EventType.SUCCESSFUL_SHOP_CREATION.toString(), null, shop);
+  }
+
+  @Override
+  public void errorCreateShopResponse() throws RemoteException {
+    support.firePropertyChange(EventType.UNSUCCESSFUL_SHOP_CREATION.toString(), null, null);
   }
 
   @Override public void addPropertyListener(String eventName,
