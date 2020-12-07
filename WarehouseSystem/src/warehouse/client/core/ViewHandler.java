@@ -127,7 +127,7 @@ public class ViewHandler
 
   public void start()
   {
-    openAdminCreateShopView();
+    openAdminUsersOverviewView();
     stage.show();
   }
 

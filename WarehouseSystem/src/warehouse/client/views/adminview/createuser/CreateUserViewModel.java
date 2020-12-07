@@ -1,5 +1,6 @@
 package warehouse.client.views.adminview.createuser;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
@@ -36,13 +37,17 @@ public class CreateUserViewModel implements PropertyChangeSubject
 
   private void displayError(PropertyChangeEvent propertyChangeEvent)
   {
-    notification.setValue(propertyChangeEvent.getPropertyName());
+    Platform.runLater(() -> {
+      notification.setValue(propertyChangeEvent.getPropertyName());
+    });
   }
 
   private void userCreation(PropertyChangeEvent propertyChangeEvent)
   {
     // if user is added successfully to the database
-    notification.setValue("The user has been added");
+    Platform.runLater(()->{
+      notification.setValue("The user has been added");
+    });
 //    support.firePropertyChange(propertyChangeEvent);
   }
 

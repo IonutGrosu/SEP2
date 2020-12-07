@@ -54,7 +54,7 @@ public class ManageUserDAOImpl implements ManageUserDAO
     try (Connection connection = jdbcController.getConnection())
     {
       PreparedStatement statement =
-          connection.prepareStatement("INSERT INTO users(firstName,lastName,username,password,position) values (?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+          connection.prepareStatement("INSERT INTO users(firstname,secondname,username,password,usertype) values (?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
       statement.setString(1, firstName);
       statement.setString(2, lastName);
       statement.setString(3, username);

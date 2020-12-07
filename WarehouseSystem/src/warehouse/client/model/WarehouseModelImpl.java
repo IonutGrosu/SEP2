@@ -88,7 +88,7 @@ public class WarehouseModelImpl implements WarehouseModel
   @Override public void setUserProperties(String firstName, String lastName,
       String username, String password, String position)
   {
-    //client.newUser(firstName, lastName, username, password, position);
+    client.newUser(firstName, lastName, username, password, position);
   }
 
   @Override public void addPropertyListener(String eventName,
