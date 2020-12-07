@@ -1,6 +1,8 @@
 package warehouse.shared.transferObjects;
 
-public class Shop
+import java.io.Serializable;
+
+public class Shop implements Serializable
 {
   private int id;
   private String city;

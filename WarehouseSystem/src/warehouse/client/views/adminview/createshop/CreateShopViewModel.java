@@ -1,5 +1,6 @@
 package warehouse.client.views.adminview.createshop;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import warehouse.client.model.WarehouseModel;
@@ -29,10 +30,16 @@ public class CreateShopViewModel implements PropertyChangeSubject {
 
     private void createShopResponse(PropertyChangeEvent event) {
         if (event.getPropertyName().equals(EventType.SUCCESSFUL_SHOP_CREATION.toString())) {
-            responseLabelProperty.setValue("Shop created successfully");
+            Platform.runLater(()-> {
+                responseLabelProperty.setValue("Shop created successfully");
+            });
             support.firePropertyChange(event);
         } else if (event.getPropertyName().equals(EventType.UNSUCCESSFUL_SHOP_CREATION.toString())) {
-            responseLabelProperty.setValue("Shop could not be created. Try a different city or street");
+            System.out.println("error creading shop");
+            Platform.runLater(() -> {
+                responseLabelProperty.setValue("Shop could not be created. Try a different city or street");
+            });
+            support.firePropertyChange(event);
         }
     }
 

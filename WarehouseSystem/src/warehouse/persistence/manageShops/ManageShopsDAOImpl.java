@@ -35,10 +35,9 @@ public class ManageShopsDAOImpl implements ManageShopsDAO
 
   @Override public boolean checkIfShopExists(String city, String street)
   {
-    boolean doesShopExist = false;
+    boolean doesShopExist = true;
     try (Connection connection = jdbcController.getConnection();)
     {
-
       PreparedStatement statement = connection.prepareStatement(
           "SELECT * FROM shops WHERE city = ? AND street = ?");
       statement.setString(1, city);
@@ -68,17 +67,13 @@ public class ManageShopsDAOImpl implements ManageShopsDAO
       try (Connection connection = jdbcController.getConnection();)
       {
         PreparedStatement statement = connection
-            .prepareStatement("INSERT INTO shops VALUES (?, ?)");
+            .prepareStatement("INSERT INTO shops VALUES (default, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
         statement.setString(1, city);
         statement.setString(2, street);
-        ResultSet resultSet = statement.executeQuery();
-        PreparedStatement statement2 = connection
-            .prepareStatement("SELECT shopId FROM shops WHERE city = ? AND street = ?");
-        statement.setString(1, city);
-        statement.setString(2, street);
-        ResultSet resultSet2 = statement.executeQuery();
-        resultSet2.getInt(1);
-        returnInt = resultSet2.getInt(1);
+        statement.executeUpdate();
+        ResultSet resultSet = statement.getGeneratedKeys();
+        if (resultSet.next())
+          returnInt = resultSet.getInt(1);
       }
       catch (SQLException throwables)
       {

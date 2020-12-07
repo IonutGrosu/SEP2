@@ -56,12 +56,17 @@ public class ServerModelImpl implements ServerModel
 
   @Override
   public void createShop(String city, String street, String clientId) {
-    boolean existingShop = manageShopsDAO.checkIfShopExists(city, street);
-    if (existingShop) {
-      support.firePropertyChange(EventType.UNSUCCESSFUL_SHOP_CREATION.toString(), clientId, null);
-    } else {
-      int id = manageShopsDAO.createShop(city, street);
+    boolean shopExistingBefore = manageShopsDAO.checkIfShopExists(city, street);
+    int id = 0;
+    if (!shopExistingBefore) {
+      id = manageShopsDAO.createShop(city, street);
+    }
+
+    boolean shopExistingAfter = manageShopsDAO.checkIfShopExists(city, street);
+    if (!shopExistingBefore && shopExistingAfter) {
       support.firePropertyChange(EventType.SUCCESSFUL_SHOP_CREATION.toString(), clientId, new Shop(id, city, street));
+    } else {
+      support.firePropertyChange(EventType.UNSUCCESSFUL_SHOP_CREATION.toString(), clientId, null);
     }
   }
 

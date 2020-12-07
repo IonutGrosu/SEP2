@@ -16,7 +16,7 @@ public class WarehouseModelImpl implements WarehouseModel
   private PropertyChangeSupport support;
   private boolean temporaryBoolean;
   private User user;
-  private String clientUsernameId;
+  private String clientUsernameId = "admin";
 
   public WarehouseModelImpl(Client client)
   {
@@ -83,7 +83,6 @@ public class WarehouseModelImpl implements WarehouseModel
 
   private void createShopResponse(PropertyChangeEvent event) {
     support.firePropertyChange(event);
-    client.addPropertyListener("userCreated", this::addCreatedUserToList);//TODO ask Maria what this is
   }
 
   @Override public void setUserProperties(String firstName, String lastName,

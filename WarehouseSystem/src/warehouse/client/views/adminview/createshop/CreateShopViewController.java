@@ -36,6 +36,7 @@ public class CreateShopViewController implements ViewController {
         actionResponseLabel.textProperty().bind(viewModel.getResponseLabelProperty());
 
         viewModel.addPropertyListener(EventType.SUCCESSFUL_SHOP_CREATION.toString(), this::shopCreateResponse);
+        viewModel.addPropertyListener(EventType.UNSUCCESSFUL_SHOP_CREATION.toString(), this::shopCreateResponse);
 
         streetTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -47,7 +48,10 @@ public class CreateShopViewController implements ViewController {
     }
 
     private void shopCreateResponse(PropertyChangeEvent event) {
-        goToUserOverviewResponseButton.setVisible(true);
+        if (event.getPropertyName().equals(EventType.SUCCESSFUL_SHOP_CREATION.toString()))
+            goToUserOverviewResponseButton.setVisible(true);
+        else
+            goToUserOverviewResponseButton.setVisible(false);
     }
 
     public void onLogout() {

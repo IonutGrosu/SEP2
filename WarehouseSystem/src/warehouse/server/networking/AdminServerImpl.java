@@ -104,21 +104,23 @@ public class AdminServerImpl implements AdminServer
       String key = entry.getKey();
       ClientCallback clientCallback = entry.getValue();
       // ...
-      if (key.equals(clientId))
-        if (eventType.equals(EventType.SUCCESSFUL_SHOP_CREATION)) {
+      if (key != null && key.equals(clientId)) {
+        if (eventType == EventType.SUCCESSFUL_SHOP_CREATION) {
           try {
             clientCallback.successCreateShopResponse(createdShop);
+            hashMap.remove(key);
           } catch (RemoteException e) {
             e.printStackTrace();
           }
-        }
-        else if (eventType.equals(EventType.UNSUCCESSFUL_SHOP_CREATION)) {
+        } else if (eventType == EventType.UNSUCCESSFUL_SHOP_CREATION) {
           try {
             clientCallback.errorCreateShopResponse();
+            hashMap.remove(key);
           } catch (RemoteException e) {
             e.printStackTrace();
           }
         }
+      }
     }
   }
 }
