@@ -85,9 +85,9 @@ public class AdminServerImpl implements AdminServer
   }
 
   @Override
-  public void createShop(String city, String street, String clientId, ClientCallback clientCallback) {
+  public void createShop(String city, String street,String zipCode, String clientId, ClientCallback clientCallback) {
     hashMap.put(clientId, clientCallback);
-    serverModel.createShop(city, street, clientId);
+    serverModel.createShop(city, street,zipCode, clientId);
   }
 
   private void createShopResponse(PropertyChangeEvent event){

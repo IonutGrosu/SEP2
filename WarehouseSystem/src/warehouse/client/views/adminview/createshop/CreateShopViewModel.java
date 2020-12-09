@@ -43,8 +43,8 @@ public class CreateShopViewModel implements PropertyChangeSubject {
         }
     }
 
-    public void createShop(String imputedCity, String imputedStreet) {
-        model.createShop(imputedCity, imputedStreet);
+    public void createShop(String imputedCity, String imputedStreet, String imputedZipCode) {
+        model.createShop(imputedCity, imputedStreet, imputedZipCode);
     }
 
     public StringProperty getResponseLabelProperty() {

@@ -38,6 +38,8 @@
             <Button layoutX="270.0" layoutY="171.0" mnemonicParsing="false" onAction="#onCreateButton" text="Create" />
             <Label fx:id="actionResponseLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="206.0" layoutY="234.0" prefWidth="192.0" text="Successful action" textAlignment="CENTER" />
             <Button fx:id="goToUserOverviewResponseButton" layoutX="229.0" layoutY="272.0" mnemonicParsing="false" onAction="#onShopsOverview" prefHeight="44.0" prefWidth="145.0" text="Return to overview" />
+            <Label layoutX="428.0" layoutY="112.0" text="by" />
+            <TextField fx:id="zipCodeTextField" layoutX="444.0" layoutY="107.0" prefHeight="26.0" prefWidth="50.0" />
          </children>
       </AnchorPane>
    </children>

@@ -1,6 +1,5 @@
 package warehouse.client.views.adminview.createshop;
 
-import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,14 +17,14 @@ import java.beans.PropertyChangeEvent;
 public class CreateShopViewController implements ViewController {
     @FXML private Label actionResponseLabel;
     @FXML private Button goToUserOverviewResponseButton;
-    @FXML private TextField cityTextField;
     @FXML private TextField streetTextField;
+    @FXML private TextField cityTextField;
+    @FXML private TextField zipCodeTextField;
 
     private ViewHandler viewHandler;
     private CreateShopViewModel viewModel;
 
-    private String imputedCity;
-    private String imputedStreet;
+
 
     @Override
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) {
@@ -63,10 +62,12 @@ public class CreateShopViewController implements ViewController {
     }
 
     public void onCreateButton() {
-        imputedCity = cityTextField.textProperty().getValue();
-        imputedStreet = streetTextField.textProperty().getValue();
-        if (!imputedStreet.isEmpty() && !imputedCity.isEmpty()) {
-            viewModel.createShop(imputedCity, imputedStreet);
+        String imputedStreet = streetTextField.textProperty().getValue();
+        String imputedCity = cityTextField.textProperty().getValue();
+        String imputedZipCode = zipCodeTextField.textProperty().getValue();
+
+        if (!imputedStreet.isEmpty() && !imputedCity.isEmpty() && !imputedZipCode.isEmpty()) {
+            viewModel.createShop(imputedCity, imputedStreet, imputedZipCode);
         }
     }
 

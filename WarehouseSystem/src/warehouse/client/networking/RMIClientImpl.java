@@ -67,9 +67,9 @@ public class RMIClientImpl implements Client, ClientCallback
   }
 
   @Override
-  public void createShop(String city, String street, String clientId) {
+  public void createShop(String city, String street,String zipCode, String clientId) {
     try {
-      rmiServer.getAdminServer().createShop(city, street, clientId ,this);
+      rmiServer.getAdminServer().createShop(city, street, zipCode, clientId ,this);
     } catch (RemoteException e) {
       e.printStackTrace();
     }

@@ -77,8 +77,8 @@ public class WarehouseModelImpl implements WarehouseModel
   }
 
   @Override
-  public void createShop(String city, String street) {
-    client.createShop(city, street, clientUsernameId);
+  public void createShop(String city, String street, String zipCode) {
+    client.createShop(city, street, zipCode, clientUsernameId);
   }
 
   private void createShopResponse(PropertyChangeEvent event) {
