@@ -17,6 +17,13 @@ public class Shop implements Serializable
     this.zipCode = zipCode;
   }
 
+  public Shop(String city, String street, String zipCode)
+  {
+    this.city = city;
+    this.street = street;
+    this.zipCode = zipCode;
+  }
+
   public int getId()
   {
     return id;
@@ -33,4 +40,12 @@ public class Shop implements Serializable
   }
 
   public String getZipCode() {return zipCode;}
+
+  public boolean equalsWithOudId(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Shop shop = (Shop) o;
+    return city.equals(shop.city) && street.equals(shop.street) && zipCode.equals(shop.zipCode);
+  }
+
 }

@@ -6,8 +6,6 @@ import warehouse.client.model.WarehouseModelImpl;
 import warehouse.client.networking.Client;
 import warehouse.client.networking.RMIClientImpl;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class CreateShopViewModelTest {
     Client client = new RMIClientImpl();
     WarehouseModel model = new WarehouseModelImpl(client);

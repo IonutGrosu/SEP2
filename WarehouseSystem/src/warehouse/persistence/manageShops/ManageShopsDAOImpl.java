@@ -74,7 +74,7 @@ public class ManageShopsDAOImpl implements ManageShopsDAO
         int id = resultSet.getInt("shopid");
         String city = resultSet.getString("city");
         String street = resultSet.getString("street");
-        String zipCode = resultSet.getString("zip");
+        String zipCode = resultSet.getString("zipcode");
         System.out.println("*" + id + " " + city + " " +street + " " + zipCode);
         allShops.add(new Shop(id, city, street, zipCode));
       }
