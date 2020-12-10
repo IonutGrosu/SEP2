@@ -15,7 +15,7 @@ class ManageShopsDAOImplTest {
     @BeforeEach
     public void arrange() {
         shopsDAO = ManageShopsDAOImpl.getInstance();
-        shopsDAO.deleteAllFromShops();
+        shopsDAO.deleteAllShops();
     }
 
     @Test

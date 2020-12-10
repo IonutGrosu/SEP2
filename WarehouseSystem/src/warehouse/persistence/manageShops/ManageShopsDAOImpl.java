@@ -104,7 +104,7 @@ public class ManageShopsDAOImpl implements ManageShopsDAO
   }
 
   //TODO delete this before hand in pls
-  public void deleteAllFromShops() {
+  public void deleteAllShops  () {
     try(Connection connection = jdbcController.getConnection()) {
       PreparedStatement statement = connection.prepareStatement("DELETE FROM shops");
       statement.executeUpdate();

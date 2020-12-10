@@ -48,4 +48,8 @@ public class Shop implements Serializable
     return city.equals(shop.city) && street.equals(shop.street) && zipCode.equals(shop.zipCode);
   }
 
+  public String toString() {
+    return id + ", " + street + ", " + city + ", " +zipCode;
+  }
+
 }

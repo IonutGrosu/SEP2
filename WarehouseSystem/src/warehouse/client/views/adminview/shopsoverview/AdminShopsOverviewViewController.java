@@ -8,6 +8,11 @@ import javafx.scene.control.ListView;
 import warehouse.client.core.ViewHandler;
 import warehouse.client.core.ViewModelFactory;
 import warehouse.client.views.ViewController;
+import warehouse.shared.transferObjects.EventType;
+import warehouse.shared.transferObjects.Shop;
+
+import java.beans.PropertyChangeEvent;
+import java.util.ArrayList;
 
 public class AdminShopsOverviewViewController implements ViewController
 {
@@ -26,13 +31,28 @@ public class AdminShopsOverviewViewController implements ViewController
     this.viewHandler = viewHandler;
     adminShopsOverviewViewModel = viewModelFactory
         .getAdminShopsOverviewViewModel();
+    adminShopsOverviewViewModel.addPropertyListener(EventType.ALL_SHOPS_LIST.toString(), this::updateListView);
+    System.out.println("controller initialised and asking for the list of shops");
   }
 
+  @Override
+  public void updateView() {
+    adminShopsOverviewViewModel.getAllShops();
+  }
+
+  private void updateListView(PropertyChangeEvent event) {
+    ArrayList<Shop> allShops = (ArrayList<Shop>) event.getNewValue();
+    System.out.println("controller received the list of shops and is populating the listview");
+    Platform.runLater(() -> {
+      listShops.getItems().clear();
+      listShops.getItems().addAll(allShops);
+    });
+  }
 
 
   public void onLogout(ActionEvent actionEvent)
   {
-    //viewHandler.openLoginView();
+
   }
 
   public void onAddShop(ActionEvent actionEvent)
@@ -42,6 +62,7 @@ public class AdminShopsOverviewViewController implements ViewController
 
   public void onRemoveShop(ActionEvent actionEvent)
   {
+    adminShopsOverviewViewModel.getAllShops();
   }
 
   public void onUserOverview(ActionEvent actionEvent) {

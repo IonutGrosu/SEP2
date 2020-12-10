@@ -53,6 +53,11 @@ public class LoginViewController implements ViewController {
         });
     }
 
+    @Override
+    public void updateView() {
+
+    }
+
     private void openView(PropertyChangeEvent propertyChangeEvent)
     {
 

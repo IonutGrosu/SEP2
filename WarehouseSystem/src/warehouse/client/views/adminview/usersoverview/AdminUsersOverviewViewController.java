@@ -31,6 +31,11 @@ public class AdminUsersOverviewViewController implements ViewController
     adminUsersOverviewViewModel.addPropertyListener("userCreated", this::addUser);
   }
 
+  @Override
+  public void updateView() {
+
+  }
+
   private void addUser(PropertyChangeEvent propertyChangeEvent)
   {
 //    listEmployees.getItems().add(propertyChangeEvent.getPropertyName());

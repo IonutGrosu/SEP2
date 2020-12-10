@@ -30,8 +30,10 @@ public class WarehouseModelImpl implements WarehouseModel
     client.addPropertyListener("userCreated", this::createUserResponse);
     client.addPropertyListener("errorCreatingUserInDatabase", this::createUserResponse);
     //response for creation of shop --Ionut
-    client.addPropertyListener(EventType.SUCCESSFUL_SHOP_CREATION.toString(), this::createShopResponse);
-    client.addPropertyListener(EventType.UNSUCCESSFUL_SHOP_CREATION.toString(), this::createShopResponse);
+    client.addPropertyListener(EventType.SUCCESSFUL_SHOP_CREATION.toString(), this::broadcastEvent);
+    client.addPropertyListener(EventType.UNSUCCESSFUL_SHOP_CREATION.toString(), this::broadcastEvent);
+    //response for asking for all the shops --Ionut
+    client.addPropertyListener(EventType.ALL_SHOPS_LIST.toString(), this::broadcastEvent);
   }
 
   private void createUserResponse(PropertyChangeEvent propertyChangeEvent)
@@ -81,7 +83,7 @@ public class WarehouseModelImpl implements WarehouseModel
     client.createShop(city, street, zipCode, clientUsernameId);
   }
 
-  private void createShopResponse(PropertyChangeEvent event) {
+  private void broadcastEvent(PropertyChangeEvent event) {
     support.firePropertyChange(event);
   }
 
@@ -89,6 +91,11 @@ public class WarehouseModelImpl implements WarehouseModel
       String username, String password, String position)
   {
     client.newUser(firstName, lastName, username, password, position);
+  }
+
+  @Override
+  public void getAllShops() {
+    client.getAllShops(clientUsernameId);
   }
 
   @Override public void addPropertyListener(String eventName,

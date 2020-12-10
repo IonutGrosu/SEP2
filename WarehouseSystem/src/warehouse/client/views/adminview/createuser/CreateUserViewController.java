@@ -49,6 +49,11 @@ public class CreateUserViewController implements ViewController
         .bindBidirectional(createUserViewModel.passwordProperty());
   }
 
+  @Override
+  public void updateView() {
+
+  }
+
   public void onUsersOverview(ActionEvent actionEvent)
   {
     viewHandler.openAdminUsersOverviewView();

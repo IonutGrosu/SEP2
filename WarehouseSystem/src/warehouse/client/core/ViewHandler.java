@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import warehouse.client.views.ViewController;
 import warehouse.client.views.adminview.createshop.CreateShopViewController;
 import warehouse.client.views.adminview.createuser.CreateUserViewController;
 import warehouse.client.views.adminview.shopsoverview.AdminShopsOverviewViewController;
@@ -94,15 +95,17 @@ public class ViewHandler
   public void openAdminShopsOverviewView()
   {
     FXMLLoader loader = new FXMLLoader();
+    ViewController controller = null;
 
     if(adminShopsOverviewScene == null)
     {
       Parent root = getRootByPath("../views/adminview/shopsoverview/adminShopsOverview.fxml", loader);
-     AdminShopsOverviewViewController controller = loader.getController();
+      controller = loader.getController();
       controller.init(this, viewModelFactory);
       adminShopsOverviewScene = new Scene(root);
     }
 
+    controller.updateView();
     stage.setTitle("Shops overview");
     stage.setScene(adminShopsOverviewScene);
   }

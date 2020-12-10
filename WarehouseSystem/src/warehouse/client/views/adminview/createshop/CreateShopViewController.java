@@ -46,6 +46,11 @@ public class CreateShopViewController implements ViewController {
         });
     }
 
+    @Override
+    public void updateView() {
+
+    }
+
     private void shopCreateResponse(PropertyChangeEvent event) {
         if (event.getPropertyName().equals(EventType.SUCCESSFUL_SHOP_CREATION.toString()))
             goToUserOverviewResponseButton.setVisible(true);
