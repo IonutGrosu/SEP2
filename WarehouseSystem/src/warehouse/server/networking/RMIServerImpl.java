@@ -1,12 +1,12 @@
 package warehouse.server.networking;
 
-import warehouse.client.networking.RMIClientImpl;
 import warehouse.server.model.ServerModel;
 import warehouse.shared.networking.ClientCallback;
-import warehouse.shared.networking.LoginServer;
+import warehouse.shared.networking.adminManageShop.AdminManageShopServer;
+import warehouse.shared.networking.adminManageUser.AdminManageUserServer;
+import warehouse.shared.networking.login.LoginServer;
 import warehouse.shared.networking.RMIServer;
 
-import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -16,7 +16,7 @@ import java.util.Map;
 public class RMIServerImpl implements RMIServer
 {
   private ServerModel serverModel;
-  private Map<ClientCallback, PropertyChangeListener> listeners = new HashMap<>();
+//  private Map<ClientCallback, PropertyChangeListener> listeners = new HashMap<>();
 
   public RMIServerImpl(ServerModel serverModel) throws RemoteException
   {
@@ -29,36 +29,15 @@ public class RMIServerImpl implements RMIServer
     return new LoginServerImpl(serverModel);
   }
 
-  @Override public warehouse.shared.networking.AdminServer getAdminServer()
+  @Override public AdminManageUserServer getAdminManageUserServer()
       throws RemoteException
   {
-    return new AdminServerImpl(serverModel);
+    return new AdminManageUserServerImpl(serverModel);
   }
 
-  //  public void registerClient(ClientCallback client)
-//  {
-//    PropertyChangeListener listener = new PropertyChangeListener()
-//    {
-//      @Override public void propertyChange(PropertyChangeEvent evt)
-//      {
-//        try
-//        {
-//          client.loginResponse((getLoginServer().getLoginResponse())evt.getNewValue());
-//
-//        }
-//        catch (RemoteException e)
-//        {
-//          e.printStackTrace();
-//          .removeListener("", this);
-//        }
-//      }
-//    };
-//  }
-//  public void unRegisterClient(ClientCallback client) {
-//    PropertyChangeListener listener = listeners.get(client);
-//    if(listener != null) {
-//      t.removeListener("NewLogEntry", listener);
-//    }
-//
-//  }
+  @Override public AdminManageShopServer getAdminManageShopServer()
+      throws RemoteException
+  {
+    return new AdminManageShopServerImpl(serverModel);
+  }
 }

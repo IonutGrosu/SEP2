@@ -70,7 +70,7 @@ public class WarehouseModelImpl implements WarehouseModel
     clientUsernameId = username;
     try
     {
-      client.login(username, password);
+      client.getLoginClient().login(username, password);
     }
     catch (RemoteException e)
     {
@@ -80,7 +80,7 @@ public class WarehouseModelImpl implements WarehouseModel
 
   @Override
   public void createShop(String city, String street, String zipCode) {
-    client.createShop(city, street, zipCode, clientUsernameId);
+    client.getAdminManageShopClient().createShop(city, street, zipCode, clientUsernameId);
   }
 
   private void broadcastEvent(PropertyChangeEvent event) {
@@ -90,12 +90,12 @@ public class WarehouseModelImpl implements WarehouseModel
   @Override public void setUserProperties(String firstName, String lastName,
       String username, String password, String position)
   {
-    client.newUser(firstName, lastName, username, password, position);
+    client.getAdminManageUserClient().newUser(firstName, lastName, username, password, position);
   }
 
   @Override
   public void getAllShops() {
-    client.getAllShops(clientUsernameId);
+//    client.getAdminManageShopClient().getAllShops(clientUsernameId); TODO resolve this one with Grosu
   }
 
   @Override public void addPropertyListener(String eventName,

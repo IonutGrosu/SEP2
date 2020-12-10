@@ -10,6 +10,7 @@ import warehouse.shared.transferObjects.User;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 
 public class ServerModelImpl implements ServerModel
 {
@@ -68,6 +69,13 @@ public class ServerModelImpl implements ServerModel
     } else {
       support.firePropertyChange(EventType.UNSUCCESSFUL_SHOP_CREATION.toString(), clientId, null);
     }
+  }
+
+  @Override public void getAllShops(String clientId)
+  {
+    ArrayList<Shop> allShops = manageShopsDAO.getAllShops();
+    System.out.println("A ajuns in get all shops servermodel");
+    support.firePropertyChange(EventType.ALL_SHOPS_LIST.toString(), clientId, allShops);
   }
 
   @Override public void addPropertyListener(String eventName,

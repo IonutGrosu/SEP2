@@ -1,17 +1,10 @@
 package warehouse.server.networking;
 
-import warehouse.client.networking.RMIClientImpl;
 import warehouse.server.model.ServerModel;
-import warehouse.shared.networking.ClientCallback;
-import warehouse.shared.networking.LoginServer;
-import warehouse.shared.util.PropertyChangeSubject;
+import warehouse.shared.networking.login.LoginServer;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.HashMap;
-import java.util.Map;
 
 public class LoginServerImpl implements LoginServer
 {
@@ -41,4 +34,31 @@ boolean b;
   public boolean getLoginResponse(){
     return b;
   }
+
+  //  public void registerClient(ClientCallback client)
+  //  {
+  //    PropertyChangeListener listener = new PropertyChangeListener()
+  //    {
+  //      @Override public void propertyChange(PropertyChangeEvent evt)
+  //      {
+  //        try
+  //        {
+  //          client.loginResponse((getLoginServer().getLoginResponse())evt.getNewValue());
+  //
+  //        }
+  //        catch (RemoteException e)
+  //        {
+  //          e.printStackTrace();
+  //          .removeListener("", this);
+  //        }
+  //      }
+  //    };
+  //  }
+  //  public void unRegisterClient(ClientCallback client) {
+  //    PropertyChangeListener listener = listeners.get(client);
+  //    if(listener != null) {
+  //      t.removeListener("NewLogEntry", listener);
+  //    }
+  //
+  //  }
 }

@@ -1,4 +1,4 @@
-package warehouse.shared.networking;
+package warehouse.shared.networking.login;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

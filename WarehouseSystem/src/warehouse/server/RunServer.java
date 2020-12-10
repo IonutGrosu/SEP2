@@ -28,6 +28,7 @@ public class RunServer
     ManageShopsDAO manageShopsDAO = ManageShopsDAOImpl.getInstance();
     ServerModel serverModel = new ServerModelImpl(loginDAO, manageUserDAO, manageShopsDAO);
     RMIServer server = new RMIServerImpl(serverModel);
+
     Registry registry = LocateRegistry.createRegistry(1099);
     System.out.println("Registry Created");
     registry.bind("Server", server);
