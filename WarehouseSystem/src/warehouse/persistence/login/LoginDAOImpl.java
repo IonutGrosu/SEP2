@@ -30,7 +30,7 @@ public class LoginDAOImpl implements LoginDAO
     public boolean checkCredentials(String username, String password) {
         boolean existingUsername = true;
         try (Connection connection = jdbcController.getConnection();) {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM account WHERE username = ? AND password = ?");
             statement.setString(1, username);
             statement.setString(2, password);
             System.out.println(statement);

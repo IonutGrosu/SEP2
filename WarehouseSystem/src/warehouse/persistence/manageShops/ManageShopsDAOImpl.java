@@ -41,7 +41,8 @@ public class ManageShopsDAOImpl implements ManageShopsDAO
     try (Connection connection = jdbcController.getConnection();)
     {
       PreparedStatement statement = connection.prepareStatement(
-          "SELECT * FROM shops WHERE city = ? AND street = ?");
+          "SELECT * FROM shop WHERE shop.zipcode = "
+              + "(SELECT city.zipcode FROM city WHERE cityname = ?) AND streetname = ?");
       statement.setString(1, city);
       statement.setString(2, street);
       ResultSet resultSet = statement.executeQuery();
@@ -68,15 +69,16 @@ public class ManageShopsDAOImpl implements ManageShopsDAO
     ArrayList<Shop> allShops = new ArrayList<>();
 
     try (Connection connection = jdbcController.getConnection()) {
-      PreparedStatement statement = connection.prepareStatement("SELECT * FROM shops");
+      PreparedStatement statement = connection.prepareStatement("SELECT * FROM shop FULL OUTER JOIN city\n"
+          + "ON shop.zipcode = city.zipcode;");
       ResultSet resultSet = statement.executeQuery();
       while (resultSet.next()) {
         int id = resultSet.getInt("shopid");
-        String city = resultSet.getString("city");
-        String street = resultSet.getString("street");
-        String zipCode = resultSet.getString("zipcode");
-        System.out.println("*" + id + " " + city + " " +street + " " + zipCode);
-        allShops.add(new Shop(id, city, street, zipCode));
+        String streetname = resultSet.getString("streetname");
+        String zipcode = resultSet.getString(3);
+        String city = resultSet.getString("cityname");
+
+        allShops.add(new Shop(id, city, streetname, zipcode));
       }
     } catch (SQLException throwables) {
       throwables.printStackTrace();
@@ -88,13 +90,19 @@ public class ManageShopsDAOImpl implements ManageShopsDAO
   public int createShop(String city, String street, String zipCode) {
     int returnInt = 0;
     try (Connection connection = jdbcController.getConnection()) {
-      PreparedStatement statement = connection
-              .prepareStatement("INSERT INTO shops VALUES (default, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
-      statement.setString(1, city);
-      statement.setString(2, street);
-      statement.setString(3, zipCode);
-      statement.executeUpdate();
-      ResultSet resultSet = statement.getGeneratedKeys();
+      PreparedStatement statement1 = connection
+          .prepareStatement("INSERT INTO city VALUES (?, ?)");
+      System.out.println(statement1);
+      statement1.setString(1, city);
+      statement1.setInt(2, Integer.parseInt(zipCode));
+      statement1.executeUpdate();
+      PreparedStatement statement2 = connection
+              .prepareStatement("INSERT INTO shop VALUES (default, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+      System.out.println(statement2);
+      statement2.setString(1, street);
+      statement2.setInt(2, Integer.parseInt(zipCode));
+      statement2.executeUpdate();
+      ResultSet resultSet = statement2.getGeneratedKeys();
       if (resultSet.next())
         returnInt = resultSet.getInt(1);
     } catch (SQLException throwables) {
@@ -106,7 +114,7 @@ public class ManageShopsDAOImpl implements ManageShopsDAO
   //TODO delete this before hand in pls
   public void deleteAllShops  () {
     try(Connection connection = jdbcController.getConnection()) {
-      PreparedStatement statement = connection.prepareStatement("DELETE FROM shops");
+      PreparedStatement statement = connection.prepareStatement("DELETE FROM shop");
       statement.executeUpdate();
     } catch (SQLException throwables) {
       throwables.printStackTrace();
