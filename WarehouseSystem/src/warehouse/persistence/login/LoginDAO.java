@@ -1,5 +1,7 @@
 package warehouse.persistence.login;
 
+import warehouse.shared.transferObjects.User;
+
 public interface LoginDAO {
-    boolean checkCredentials(String username, String password);
+    User checkCredentials(String username, String password);
 }

@@ -9,7 +9,6 @@ import java.rmi.server.UnicastRemoteObject;
 public class LoginServerImpl implements LoginServer
 {
   private ServerModel serverModel;
-boolean b;
 
   public LoginServerImpl(ServerModel serverModel)
   {
@@ -27,12 +26,7 @@ boolean b;
   @Override public boolean login(String username, String password)
       throws RemoteException
   {
-    b = serverModel.checkCredentials(username, password);
   return serverModel.checkCredentials(username, password);
-  }
-  @Override
-  public boolean getLoginResponse(){
-    return b;
   }
 
   //  public void registerClient(ClientCallback client)

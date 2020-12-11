@@ -18,8 +18,8 @@ public class LoginViewController implements ViewController {
     private LoginViewModel loginViewModel;
     private ViewHandler viewHandler;
 
-    @FXML public TextField usernameId;
-    @FXML public TextField passwordId;
+    @FXML public TextField usernameTextField;
+    @FXML public TextField passwordTextField;
     @FXML public Label errorLabelId;
 
 
@@ -37,14 +37,14 @@ public class LoginViewController implements ViewController {
         loginViewModel.addPropertyListener("ADMIN", this::openView);
 
 
-        usernameId.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        usernameTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode().equals(KeyCode.ENTER))
                     sendCredentials();
             }
         });
-        passwordId.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        passwordTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode().equals(KeyCode.ENTER))
@@ -91,8 +91,9 @@ public class LoginViewController implements ViewController {
     @FXML
     public void sendCredentials()
     {
-        viewHandler.openAdminUsersOverviewView();//testing purposes, delete this when implementing the full login system
-        if (usernameId != null && passwordId != null)
-        loginViewModel.sendCredentials(usernameId.getText(), passwordId.getText());
+        String imputedUsername = usernameTextField.textProperty().getValue();
+        String imputedPassword = passwordTextField.textProperty().getValue();
+        if (!imputedUsername.isEmpty() && !imputedPassword.isEmpty())
+        loginViewModel.sendCredentials(imputedUsername, imputedPassword);
     }
 }

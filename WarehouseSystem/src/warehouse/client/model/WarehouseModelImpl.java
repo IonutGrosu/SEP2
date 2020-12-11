@@ -95,7 +95,7 @@ public class WarehouseModelImpl implements WarehouseModel
 
   @Override
   public void getAllShops() {
-//    client.getAdminManageShopClient().getAllShops(clientUsernameId); TODO resolve this one with Grosu
+    client.getAdminManageShopClient().getAllShops(clientUsernameId);
   }
 
   @Override public void addPropertyListener(String eventName,
