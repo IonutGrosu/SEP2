@@ -44,7 +44,7 @@ public class AdminShopsOverviewViewController implements ViewController
 
   private void onDeleteUpdate(PropertyChangeEvent propertyChangeEvent)
   {
-
+    updateView();
   }
 
   @Override public void updateView()
