@@ -10,6 +10,7 @@ import javafx.scene.input.KeyEvent;
 import warehouse.client.core.ViewHandler;
 import warehouse.client.core.ViewModelFactory;
 import warehouse.client.views.ViewController;
+import warehouse.shared.transferObjects.User;
 
 import java.beans.PropertyChangeEvent;
 
@@ -20,7 +21,7 @@ public class LoginViewController implements ViewController {
 
     @FXML public TextField usernameTextField;
     @FXML public TextField passwordTextField;
-    @FXML public Label errorLabelId;
+    @FXML public Label errorLabel;
 
 
     @Override
@@ -28,14 +29,7 @@ public class LoginViewController implements ViewController {
         this.loginViewModel = viewModelFactory.getLoginViewModel();
         this.viewHandler = viewHandler;
 
-        errorLabelId.textProperty().setValue("");
-        errorLabelId.textProperty().bind(loginViewModel.getError());
-
-        loginViewModel.addPropertyListener("loginResponse", this::openView);
-        loginViewModel.addPropertyListener("MANAGER", this::openView);
-        loginViewModel.addPropertyListener("EMPLOYEE", this::openView);
-        loginViewModel.addPropertyListener("ADMIN", this::openView);
-
+        errorLabel.textProperty().setValue("");
 
         usernameTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -54,46 +48,39 @@ public class LoginViewController implements ViewController {
     }
 
     @Override
-    public void updateView() {
-
-    }
-
-    private void openView(PropertyChangeEvent propertyChangeEvent)
-    {
-
-        switch (propertyChangeEvent.getPropertyName())
-        {
-            case "MANAGER" :
-//                Platform.runLater(() -> {
-//                    viewHandler.openViewPlaceholder();
-//                });
-                break;
-            case "EMPLOYEE" :
-//                Platform.runLater(() -> {
-//                    viewHandler.openView2Placeholder();
-//                });
-                break;
-            case "ADMIN" :
-//                Platform.runLater(() -> {
-//                    viewHandler.openView3Placeholder();
-//                });
-                break;
-            case "loginResponse" :
-//                Platform.runLater(() -> {
-//                    viewHandler.openView4Placeholder();
-//                });
-                System.out.println("It works and here in the controller should"
-                    + " call the next view");
-                break;
-        }
-    }
+    public void updateView() {}
 
     @FXML
     public void sendCredentials()
     {
         String imputedUsername = usernameTextField.textProperty().getValue();
         String imputedPassword = passwordTextField.textProperty().getValue();
+        User userLoggedIn = null;
         if (!imputedUsername.isEmpty() && !imputedPassword.isEmpty())
-        loginViewModel.sendCredentials(imputedUsername, imputedPassword);
+            userLoggedIn = loginViewModel.sendCredentials(imputedUsername, imputedPassword);
+        if (userLoggedIn == null) {
+            errorLabel.textProperty().setValue("Wrong username or password");
+        } else {
+            String position = userLoggedIn.getPosition();
+            switch(position) {
+                case "ADMIN":
+                    Platform.runLater(() -> {
+                        viewHandler.openAdminUsersOverviewView();
+                    });
+                    break;
+                case "EMPLOYEE":
+                    Platform.runLater(() -> {
+                        //viewHandler.openEmployeeView();
+                        System.out.println("Employee view not created yet");
+                    });
+                    break;
+                case "MANAGER":
+                    Platform.runLater(() -> {
+                        //viewHandler.openManagerView();
+                        System.out.println("Manager view not created yet");
+                    });
+                    break;
+            }
+        }
     }
 }

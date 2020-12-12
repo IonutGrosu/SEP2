@@ -5,5 +5,4 @@ import java.rmi.RemoteException;
 
 public interface LoginClientCallback extends Remote
 {
-  void loginResponse(boolean b) throws RemoteException;
 }

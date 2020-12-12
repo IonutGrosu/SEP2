@@ -2,6 +2,7 @@ package warehouse.server.networking;
 
 import warehouse.server.model.ServerModel;
 import warehouse.shared.networking.login.LoginServer;
+import warehouse.shared.transferObjects.User;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -23,10 +24,10 @@ public class LoginServerImpl implements LoginServer
     this.serverModel = serverModel;
   }
 
-  @Override public boolean login(String username, String password)
-      throws RemoteException
-  {
-  return serverModel.checkCredentials(username, password);
+  @Override
+  public User login(String username, String password)
+          throws RemoteException {
+    return serverModel.checkCredentials(username, password);
   }
 
   //  public void registerClient(ClientCallback client)

@@ -22,9 +22,6 @@ public class WarehouseModelImpl implements WarehouseModel
   {
     this.client = client;
     support = new PropertyChangeSupport(this);
-    //response for login
-    client.addPropertyListener("loginResponse", this::loginResponse);
-    client.addPropertyListener("errorResponse", this::loginResponse);
     //response for admin creating user -- Claudiu
     client.addPropertyListener("alreadyExistingUsername", this::createUserResponse);
     client.addPropertyListener("userCreated", this::createUserResponse);
@@ -46,36 +43,10 @@ public class WarehouseModelImpl implements WarehouseModel
     support.firePropertyChange(propertyChangeEvent);
   }
 
-
-  private void loginResponse(PropertyChangeEvent propertyChangeEvent)
-  {
-    support.firePropertyChange(propertyChangeEvent);
-//    user = (User) propertyChangeEvent.getNewValue();
-//    switch (user.getUserType())
-//    {
-//      case MANAGER :
-//        support.firePropertyChange("MANAGER", null, user);
-//        break;
-//      case EMPLOYEE:
-//        support.firePropertyChange("EMPLOYEE", null, user);
-//        break;
-//      case ADMIN:
-//        support.firePropertyChange("ADMIN", null, user);
-//        break;
-//    }
-  }
-
-  @Override public void login(String username, String password)
+  @Override public User login(String username, String password)
   {
     clientUsernameId = username;
-    try
-    {
-      client.getLoginClient().login(username, password);
-    }
-    catch (RemoteException e)
-    {
-      e.printStackTrace();
-    }
+    return client.getLoginClient().login(username, password);
   }
 
   @Override

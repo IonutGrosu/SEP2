@@ -26,12 +26,12 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="usernameId" layoutX="240.0" layoutY="115.0">
+            <TextField fx:id="usernameTextField" layoutX="240.0" layoutY="115.0">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <TextField fx:id="passwordId" layoutX="240.0" layoutY="181.0">
+            <TextField fx:id="passwordTextField" layoutX="240.0" layoutY="181.0">
                <font>
                   <Font size="18.0" />
                </font>
@@ -41,7 +41,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Label fx:id="errorLabelId" layoutX="256.0" layoutY="234.0" text="error message" textFill="#e80101">
+            <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="130.0" layoutY="233.0" prefHeight="18.0" prefWidth="341.0" text="Wrong username or password" textFill="#e80101">
                <font>
                   <Font size="14.0" />
                </font>

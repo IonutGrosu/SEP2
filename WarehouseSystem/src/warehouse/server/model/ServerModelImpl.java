@@ -28,9 +28,8 @@ public class ServerModelImpl implements ServerModel
   }
 
   @Override
-  public boolean checkCredentials(String username, String password) {
-    //return loginDAO.checkCredentials(username, password);
-    return true;
+  public User checkCredentials(String username, String password) {
+    return loginDAO.checkCredentials(username, password);
   }
 
   @Override public void newUser(String firstName, String lastName,
@@ -75,7 +74,7 @@ public class ServerModelImpl implements ServerModel
   @Override public void getAllShops(String clientId)
   {
     ArrayList<Shop> allShops = manageShopsDAO.getAllShops();
-    System.out.println("A ajuns in get all shops servermodel");
+    System.out.println("ServerModelImpl.java checking DAO for allShops list");
     support.firePropertyChange(EventType.ALL_SHOPS_LIST.toString(), clientId, allShops);
   }
 

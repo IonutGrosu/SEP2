@@ -53,6 +53,7 @@ public class AdminManageShopClientImpl implements AdminManageShopClient,
   @Override public void allShopsResponse(ArrayList<Shop> allShops)
       throws RemoteException
   {
+    System.out.println("allShops list got back to AdminManageShopClientImpl.java");
     support.firePropertyChange(EventType.ALL_SHOPS_LIST.toString(), null, allShops);
   }
 

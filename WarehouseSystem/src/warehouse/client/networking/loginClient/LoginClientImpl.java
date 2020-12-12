@@ -3,6 +3,7 @@ package warehouse.client.networking.loginClient;
 import warehouse.client.networking.Connection;
 import warehouse.shared.networking.RMIServer;
 import warehouse.shared.networking.login.LoginClientCallback;
+import warehouse.shared.transferObjects.User;
 
 import java.beans.PropertyChangeSupport;
 import java.rmi.NotBoundException;
@@ -15,7 +16,6 @@ public class LoginClientImpl implements LoginClient, LoginClientCallback
 {
   private RMIServer rmiServer;
   private PropertyChangeSupport support;
-  private boolean b;
 
   public LoginClientImpl()
   {
@@ -31,15 +31,14 @@ public class LoginClientImpl implements LoginClient, LoginClientCallback
     rmiServer = Connection.getRmiServer();
   }
 
-  @Override public void login(String username, String password)
-      throws RemoteException
+  @Override public User login(String username, String password)
   {
-    System.out.println("Client Asks For Verification");
-    b = rmiServer.getLoginServer().login(username, password);
-  }
-
-  @Override public void loginResponse(boolean b)
-  {
-    support.firePropertyChange("loginResponse", null, b);
+    User userLoggedIn = null;
+    try {
+       userLoggedIn = rmiServer.getLoginServer().login(username, password);
+    } catch (RemoteException e) {
+      e.printStackTrace();
+    }
+    return userLoggedIn;
   }
 }

@@ -42,11 +42,13 @@ public class AdminManageShopServerImpl implements AdminManageShopServer
 
   private void allShopsResponse(PropertyChangeEvent event) {
     String clientId = (String) event.getOldValue();
+    System.out.println("allShops list got back to AdminManagerShopServerImpl.java");
     ArrayList<Shop> allShops = (ArrayList<Shop>) event.getNewValue();
 
     try {
       AdminManageShopClientCallback clientToCallback = hashMap.remove(clientId);
       if (clientToCallback != null) {
+        System.out.println("sending to client callback");
         clientToCallback.allShopsResponse(allShops);
       }
     } catch (RemoteException e) {
