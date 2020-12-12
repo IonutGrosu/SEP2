@@ -9,4 +9,5 @@ public interface AdminManageUserServer extends Remote
 {
   void newUser(String firstName, String lastName, String username, String password,
       String position, AdminManageUserClientCallback adminManageUserClientCallback) throws RemoteException;
+  void getAllUsers(String clientUsernameId, AdminManageUserClientCallback adminManageUserClientCallback) throws RemoteException;
 }

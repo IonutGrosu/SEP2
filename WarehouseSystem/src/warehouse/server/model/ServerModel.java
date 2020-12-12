@@ -8,4 +8,5 @@ public interface ServerModel extends PropertyChangeSubject {
     void newUser(String firstName, String lastName, String username, String password, String position);
     void createShop(String city, String street, String zipCode, String clientId);
     void getAllShops(String clientId);
+    void getAllUsers(String clientUsernameId);
 }

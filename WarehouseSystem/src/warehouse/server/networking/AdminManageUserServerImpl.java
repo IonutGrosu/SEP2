@@ -2,15 +2,18 @@ package warehouse.server.networking;
 
 import warehouse.server.model.ServerModel;
 import warehouse.shared.networking.ClientCallback;
+import warehouse.shared.networking.adminManageShop.AdminManageShopClientCallback;
 import warehouse.shared.networking.adminManageUser.AdminManageUserClientCallback;
 import warehouse.shared.networking.adminManageUser.AdminManageUserServer;
 import warehouse.shared.transferObjects.EventType;
+import warehouse.shared.transferObjects.Shop;
 import warehouse.shared.transferObjects.User;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeSupport;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +38,22 @@ public class AdminManageUserServerImpl implements AdminManageUserServer
     serverModel.addPropertyListener("userCreated", this::createUserResponse);
     serverModel.addPropertyListener("alreadyExistingUsername", this::createUserResponse);
     serverModel.addPropertyListener("errorCreatingUserInDatabase", this::createUserResponse);
+    serverModel.addPropertyListener(EventType.ALL_USERS_LIST.toString(), this::allUsersResponse);
+  }
+
+  private void allUsersResponse(PropertyChangeEvent propertyChangeEvent)
+  {
+    String clientUsernameId = (String) propertyChangeEvent.getOldValue();
+    ArrayList<User> allUsers = (ArrayList<User>) propertyChangeEvent.getNewValue();
+
+    try {
+      AdminManageUserClientCallback clientToCallback = hashMap.remove(clientUsernameId);
+      if (clientToCallback != null) {
+        clientToCallback.allUsersResponse(allUsers);
+      }
+    } catch (RemoteException e) {
+      e.printStackTrace();
+    }
   }
 
   private void createUserResponse(PropertyChangeEvent propertyChangeEvent)
@@ -79,5 +98,11 @@ public class AdminManageUserServerImpl implements AdminManageUserServer
   {
     hashMap.put(username, adminManageUserClientCallback);
     serverModel.newUser(firstName, lastName, username, password, position);
+  }
+
+  @Override public void getAllUsers(String clientUsernameId, AdminManageUserClientCallback adminManageUserClientCallback)
+  {
+    hashMap.put(clientUsernameId, adminManageUserClientCallback);
+    serverModel.getAllUsers(clientUsernameId);
   }
 }

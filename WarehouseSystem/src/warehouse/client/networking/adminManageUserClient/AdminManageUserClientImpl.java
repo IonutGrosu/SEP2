@@ -3,11 +3,13 @@ package warehouse.client.networking.adminManageUserClient;
 import warehouse.client.networking.Connection;
 import warehouse.shared.networking.RMIServer;
 import warehouse.shared.networking.adminManageUser.AdminManageUserClientCallback;
+import warehouse.shared.transferObjects.EventType;
 import warehouse.shared.transferObjects.User;
 
 import java.beans.PropertyChangeSupport;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 public class AdminManageUserClientImpl implements AdminManageUserClient,
     AdminManageUserClientCallback
@@ -42,6 +44,17 @@ public class AdminManageUserClientImpl implements AdminManageUserClient,
     }
   }
 
+  @Override public void getAllUsers(String clientUsernameId)
+  {
+    try
+    {
+      rmiServer.getAdminManageUserServer().getAllUsers(clientUsernameId, this);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+  }
 
   @Override public void successCreateUserResponse(User user)
   {
@@ -52,6 +65,12 @@ public class AdminManageUserClientImpl implements AdminManageUserClient,
   @Override public void errorCreateUserResponse(String eventName)
   {
     support.firePropertyChange(eventName, null, null);
+  }
+
+  @Override public void allUsersResponse(ArrayList<User> allUsers)
+      throws RemoteException
+  {
+    support.firePropertyChange(EventType.ALL_USERS_LIST.toString(), null, allUsers);
   }
 
 }

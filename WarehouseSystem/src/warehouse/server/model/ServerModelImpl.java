@@ -78,6 +78,12 @@ public class ServerModelImpl implements ServerModel
     support.firePropertyChange(EventType.ALL_SHOPS_LIST.toString(), clientId, allShops);
   }
 
+  @Override public void getAllUsers(String clientUsernameId)
+  {
+    ArrayList<User> allUsers = manageUserDAO.getAllUsers();
+    support.firePropertyChange(EventType.ALL_USERS_LIST.toString(), clientUsernameId, allUsers);
+  }
+
   @Override public void addPropertyListener(String eventName,
       PropertyChangeListener listener)
   {

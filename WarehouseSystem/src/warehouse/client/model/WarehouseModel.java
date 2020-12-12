@@ -10,5 +10,6 @@ public interface WarehouseModel extends PropertyChangeSubject {
     void setUserProperties(String firstName, String lastName, String username,
       String password, String position);
     void getAllShops();
+    void getAllUsers();
   void deleteShop(Shop shop);
 }
