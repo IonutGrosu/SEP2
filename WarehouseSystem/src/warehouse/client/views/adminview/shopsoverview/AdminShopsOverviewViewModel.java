@@ -20,6 +20,12 @@ public class AdminShopsOverviewViewModel implements PropertyChangeSubject {
         System.out.println("viewModel initialised");
 
         this.warehouseModel.addPropertyListener(EventType.ALL_SHOPS_LIST.toString(), this::broadcastEvent);
+        this.warehouseModel.addPropertyListener(EventType.SUCCESSFUL_SHOP_DELETION.toString(), this::onDeleteResponse);
+    }
+
+    private void onDeleteResponse(PropertyChangeEvent propertyChangeEvent)
+    {
+        support.firePropertyChange(propertyChangeEvent);
     }
 
     private void broadcastEvent(PropertyChangeEvent event) {
@@ -39,5 +45,10 @@ public class AdminShopsOverviewViewModel implements PropertyChangeSubject {
 
     public void getAllShops() {
         warehouseModel.getAllShops();
+    }
+
+    public void removeShop(Shop shop)
+    {
+        warehouseModel.deleteShop(shop);
     }
 }

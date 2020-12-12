@@ -1,6 +1,7 @@
 package warehouse.client.views.adminview.shopsoverview;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -31,28 +32,41 @@ public class AdminShopsOverviewViewController implements ViewController
     this.viewHandler = viewHandler;
     adminShopsOverviewViewModel = viewModelFactory
         .getAdminShopsOverviewViewModel();
-    adminShopsOverviewViewModel.addPropertyListener(EventType.ALL_SHOPS_LIST.toString(), this::updateListView);
-    System.out.println("controller initialised and asking for the list of shops");
+    adminShopsOverviewViewModel
+        .addPropertyListener(EventType.ALL_SHOPS_LIST.toString(),
+            this::updateListView);
+    System.out
+        .println("controller initialised and asking for the list of shops");
+    adminShopsOverviewViewModel
+        .addPropertyListener(EventType.SUCCESSFUL_SHOP_DELETION.toString(),
+            this::onDeleteUpdate);
   }
 
-  @Override
-  public void updateView() {
+  private void onDeleteUpdate(PropertyChangeEvent propertyChangeEvent)
+  {
+
+  }
+
+  @Override public void updateView()
+  {
     adminShopsOverviewViewModel.getAllShops();
   }
 
-  private void updateListView(PropertyChangeEvent event) {
+  private void updateListView(PropertyChangeEvent event)
+  {
     ArrayList<Shop> allShops = (ArrayList<Shop>) event.getNewValue();
-    System.out.println("controller received the list of shops and is populating the listview");
+    System.out.println(
+        "controller received the list of shops and is populating the listview");
     Platform.runLater(() -> {
       listShops.getItems().clear();
       listShops.getItems().addAll(allShops);
     });
   }
 
-
   public void onLogout(ActionEvent actionEvent)
   {
-
+    // updated the list after an item has been removed
+    adminShopsOverviewViewModel.getAllShops();
   }
 
   public void onAddShop(ActionEvent actionEvent)
@@ -62,10 +76,13 @@ public class AdminShopsOverviewViewController implements ViewController
 
   public void onRemoveShop(ActionEvent actionEvent)
   {
-    adminShopsOverviewViewModel.getAllShops();
+    ObservableList selectedItem = listShops.getSelectionModel()
+        .getSelectedItems();
+    adminShopsOverviewViewModel.removeShop((Shop) selectedItem.get(0));
   }
 
-  public void onUserOverview(ActionEvent actionEvent) {
+  public void onUserOverview(ActionEvent actionEvent)
+  {
     viewHandler.openAdminUsersOverviewView();
   }
 }

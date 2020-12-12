@@ -2,6 +2,7 @@ package warehouse.client.model;
 
 import warehouse.client.networking.Client;
 import warehouse.shared.transferObjects.EventType;
+import warehouse.shared.transferObjects.Shop;
 import warehouse.shared.transferObjects.User;
 import warehouse.shared.transferObjects.UserType;
 
@@ -31,6 +32,13 @@ public class WarehouseModelImpl implements WarehouseModel
     client.addPropertyListener(EventType.UNSUCCESSFUL_SHOP_CREATION.toString(), this::broadcastEvent);
     //response for asking for all the shops --Ionut
     client.addPropertyListener(EventType.ALL_SHOPS_LIST.toString(), this::broadcastEvent);
+    // response for successful deletion of the shop selected
+    client.addPropertyListener(EventType.SUCCESSFUL_SHOP_DELETION.toString(), this::deletionEvent);
+  }
+
+  private void deletionEvent(PropertyChangeEvent propertyChangeEvent)
+  {
+    support.firePropertyChange(propertyChangeEvent);
   }
 
   private void createUserResponse(PropertyChangeEvent propertyChangeEvent)
@@ -67,6 +75,11 @@ public class WarehouseModelImpl implements WarehouseModel
   @Override
   public void getAllShops() {
     client.getAdminManageShopClient().getAllShops(clientUsernameId);
+  }
+
+  @Override public void deleteShop(Shop shop)
+  {
+    client.getAdminManageShopClient().deleteShop(shop);
   }
 
   @Override public void addPropertyListener(String eventName,
