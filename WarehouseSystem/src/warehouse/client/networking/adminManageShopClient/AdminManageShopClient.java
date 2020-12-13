@@ -6,5 +6,5 @@ public interface AdminManageShopClient
 {
   void createShop(String city, String street,String zipCode, String clientId);
   void getAllShops(String clientId);
-  void deleteShop(Shop shop);
+  void deleteShop(String clientId, Shop shop);
 }

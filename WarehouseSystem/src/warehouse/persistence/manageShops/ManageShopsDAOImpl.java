@@ -86,6 +86,11 @@ public class ManageShopsDAOImpl implements ManageShopsDAO
     return allShops;
   }
 
+  @Override public void deleteShop(Shop shop)
+  {
+
+  }
+
   @Override
   public int createShop(String city, String street, String zipCode) {
     int returnInt = 0;

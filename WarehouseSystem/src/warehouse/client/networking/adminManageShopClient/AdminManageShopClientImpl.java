@@ -57,11 +57,29 @@ public class AdminManageShopClientImpl implements AdminManageShopClient,
     support.firePropertyChange(EventType.ALL_SHOPS_LIST.toString(), null, allShops);
   }
 
+  @Override public void deleteShopResponse(String response)
+      throws RemoteException
+  {
+    support.firePropertyChange(response, null, null);
+  }
+
   @Override
   public void getAllShops(String clientId) {
     try {
       rmiServer.getAdminManageShopServer().getAllShops(clientId, this);
     } catch (RemoteException e) {
+      e.printStackTrace();
+    }
+  }
+
+  @Override public void deleteShop(String clientId, Shop shop)
+  {
+    try
+    {
+      rmiServer.getAdminManageShopServer().deleteShop(clientId, shop, this);
+    }
+    catch (RemoteException e)
+    {
       e.printStackTrace();
     }
   }

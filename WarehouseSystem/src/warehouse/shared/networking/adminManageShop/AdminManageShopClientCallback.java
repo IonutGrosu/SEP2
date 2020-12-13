@@ -11,4 +11,5 @@ public interface AdminManageShopClientCallback extends Remote
   void successCreateShopResponse(Shop createdShop) throws RemoteException;
   void errorCreateShopResponse() throws RemoteException;
   void allShopsResponse(ArrayList<Shop> allShops) throws RemoteException;
+  void deleteShopResponse(String response) throws RemoteException;
 }

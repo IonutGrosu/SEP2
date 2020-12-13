@@ -9,4 +9,5 @@ public interface ManageShopsDAO
   int createShop(String city, String street, String zipCode);
   boolean checkIfShopExists(String city, String street);
   ArrayList<Shop> getAllShops();
+  void deleteShop(Shop shop);
 }

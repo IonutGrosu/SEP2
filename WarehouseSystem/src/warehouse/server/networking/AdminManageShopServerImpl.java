@@ -38,6 +38,22 @@ public class AdminManageShopServerImpl implements AdminManageShopServer
     serverModel.addPropertyListener(EventType.SUCCESSFUL_SHOP_CREATION.toString(), this::createShopResponse);
     serverModel.addPropertyListener(EventType.UNSUCCESSFUL_SHOP_CREATION.toString(), this::createShopResponse);
     serverModel.addPropertyListener(EventType.ALL_SHOPS_LIST.toString(), this::allShopsResponse);
+    serverModel.addPropertyListener(EventType.SHOP_DELETED.toString(), this::shopDeleteResponse);
+    serverModel.addPropertyListener(EventType.SHOP_DELETE_ERROR.toString(), this::shopDeleteResponse);
+  }
+
+  private void shopDeleteResponse(PropertyChangeEvent propertyChangeEvent)
+  {
+    String clientId = (String) propertyChangeEvent.getNewValue();
+    String message = propertyChangeEvent.getPropertyName();
+    try {
+      AdminManageShopClientCallback clientToCallback = hashMap.remove(clientId);
+      if (clientToCallback != null) {
+        clientToCallback.deleteShopResponse(message);
+      }
+    } catch (RemoteException e) {
+      e.printStackTrace();
+    }
   }
 
   private void allShopsResponse(PropertyChangeEvent event) {
@@ -67,6 +83,14 @@ public class AdminManageShopServerImpl implements AdminManageShopServer
   {
     hashMap.put(clientId, adminManageShopClientCallback);
     serverModel.getAllShops(clientId);
+  }
+
+  @Override public void deleteShop(String clientId, Shop shop,
+      AdminManageShopClientCallback adminManageShopClientCallback)
+      throws RemoteException
+  {
+    hashMap.put(clientId, adminManageShopClientCallback);
+    serverModel.deleteShop(clientId, shop);
   }
 
   private void createShopResponse(PropertyChangeEvent event){

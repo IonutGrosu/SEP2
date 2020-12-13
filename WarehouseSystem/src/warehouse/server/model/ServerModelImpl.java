@@ -84,6 +84,19 @@ public class ServerModelImpl implements ServerModel
     support.firePropertyChange(EventType.ALL_USERS_LIST.toString(), clientUsernameId, allUsers);
   }
 
+  @Override public void deleteShop(String clientId, Shop shop)
+  {
+    manageShopsDAO.deleteShop(shop);
+    if(!(manageShopsDAO.checkIfShopExists(shop.getCity(), shop.getStreet())))
+    {
+      support.firePropertyChange(EventType.SHOP_DELETED.toString(), null, clientId);
+    }
+    else
+    {
+      support.firePropertyChange(EventType.SHOP_DELETE_ERROR.toString(), null, clientId);
+    }
+  }
+
   @Override public void addPropertyListener(String eventName,
       PropertyChangeListener listener)
   {

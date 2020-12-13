@@ -33,8 +33,9 @@ public class WarehouseModelImpl implements WarehouseModel
     //response for asking for all the shops --Ionut
     client.addPropertyListener(EventType.ALL_SHOPS_LIST.toString(), this::broadcastEvent);
     client.addPropertyListener(EventType.ALL_USERS_LIST.toString(), this::broadcastEvent);
-    // response for successful deletion of the shop selected
-    client.addPropertyListener(EventType.SUCCESSFUL_SHOP_DELETION.toString(), this::deletionEvent);
+    // response for successful or error deletion of the shop selected
+    client.addPropertyListener(EventType.SHOP_DELETED.toString(), this::deletionEvent); //TODO talk with Maria to fix the events
+    client.addPropertyListener(EventType.SHOP_DELETE_ERROR.toString(), this::deletionEvent);
   }
 
   private void deletionEvent(PropertyChangeEvent propertyChangeEvent)
@@ -85,7 +86,7 @@ public class WarehouseModelImpl implements WarehouseModel
 
   @Override public void deleteShop(Shop shop)
   {
-    client.getAdminManageShopClient().deleteShop(shop);
+    client.getAdminManageShopClient().deleteShop(clientUsernameId, shop);
   }
 
   @Override public void addPropertyListener(String eventName,
