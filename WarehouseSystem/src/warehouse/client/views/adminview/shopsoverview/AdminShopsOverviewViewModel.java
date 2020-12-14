@@ -17,7 +17,6 @@ public class AdminShopsOverviewViewModel implements PropertyChangeSubject {
     public AdminShopsOverviewViewModel(WarehouseModel warehouseModel) {
         this.warehouseModel = warehouseModel;
         support = new PropertyChangeSupport(this);
-        System.out.println("viewModel initialised");
 
         this.warehouseModel.addPropertyListener(EventType.ALL_SHOPS_LIST.toString(), this::broadcastEvent);
         this.warehouseModel.addPropertyListener(EventType.SUCCESSFUL_SHOP_DELETION.toString(), this::onDeleteResponse);
@@ -30,7 +29,6 @@ public class AdminShopsOverviewViewModel implements PropertyChangeSubject {
 
     private void broadcastEvent(PropertyChangeEvent event) {
         support.firePropertyChange(event);
-        System.out.println("viewModel broadcasting the event containig the list of shops");
     }
 
     @Override

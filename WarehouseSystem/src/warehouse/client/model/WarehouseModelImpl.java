@@ -15,27 +15,25 @@ public class WarehouseModelImpl implements WarehouseModel
 {
   private Client client;
   private PropertyChangeSupport support;
-  private boolean temporaryBoolean;
-  private User user;
-  private String clientUsernameId = "admin";
+  private String clientUsernameId;
 
   public WarehouseModelImpl(Client client)
   {
     this.client = client;
     support = new PropertyChangeSupport(this);
     //response for admin creating user -- Claudiu
-    client.addPropertyListener("alreadyExistingUsername", this::createUserResponse);
-    client.addPropertyListener("userCreated", this::createUserResponse);
-    client.addPropertyListener("errorCreatingUserInDatabase", this::createUserResponse);
+    client.getAdminManageUserClient().addPropertyListener("alreadyExistingUsername", this::createUserResponse);
+    client.getAdminManageUserClient().addPropertyListener("userCreated", this::createUserResponse);
+    client.getAdminManageUserClient().addPropertyListener("errorCreatingUserInDatabase", this::createUserResponse);
     //response for creation of shop --Ionut
-    client.addPropertyListener(EventType.SUCCESSFUL_SHOP_CREATION.toString(), this::broadcastEvent);
-    client.addPropertyListener(EventType.UNSUCCESSFUL_SHOP_CREATION.toString(), this::broadcastEvent);
+    client.getAdminManageShopClient().addPropertyListener(EventType.SUCCESSFUL_SHOP_CREATION.toString(), this::broadcastEvent);
+    client.getAdminManageShopClient().addPropertyListener(EventType.UNSUCCESSFUL_SHOP_CREATION.toString(), this::broadcastEvent);
     //response for asking for all the shops --Ionut
-    client.addPropertyListener(EventType.ALL_SHOPS_LIST.toString(), this::broadcastEvent);
-    client.addPropertyListener(EventType.ALL_USERS_LIST.toString(), this::broadcastEvent);
+    client.getAdminManageShopClient().addPropertyListener(EventType.ALL_SHOPS_LIST.toString(), this::broadcastEvent);
+    client.getAdminManageUserClient().addPropertyListener(EventType.ALL_USERS_LIST.toString(), this::broadcastEvent);
     // response for successful or error deletion of the shop selected
-    client.addPropertyListener(EventType.SHOP_DELETED.toString(), this::deletionEvent); //TODO talk with Maria to fix the events
-    client.addPropertyListener(EventType.SHOP_DELETE_ERROR.toString(), this::deletionEvent);
+    client.getAdminManageShopClient().addPropertyListener(EventType.SHOP_DELETED.toString(), this::deletionEvent); //TODO talk with Maria to fix the events
+    client.getAdminManageShopClient().addPropertyListener(EventType.SHOP_DELETE_ERROR.toString(), this::deletionEvent);
   }
 
   private void deletionEvent(PropertyChangeEvent propertyChangeEvent)

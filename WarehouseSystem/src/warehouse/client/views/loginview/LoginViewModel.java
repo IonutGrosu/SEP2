@@ -11,7 +11,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class  LoginViewModel implements PropertyChangeSubject
+public class  LoginViewModel
 {
   private WarehouseModel warehouseModel;
   private PropertyChangeSupport support;
@@ -22,20 +22,8 @@ public class  LoginViewModel implements PropertyChangeSubject
     support = new PropertyChangeSupport(this);
   }
 
-
   public User sendCredentials(String username, String password)
   {
     return warehouseModel.login(username, password);
-  }
-
-  @Override public void addPropertyListener(String eventName,
-      PropertyChangeListener listener)
-  {
-    if(eventName == null)
-    {
-      support.addPropertyChangeListener(listener);
-    } else {
-      support.addPropertyChangeListener(eventName, listener);
-    }
   }
 }

@@ -35,8 +35,7 @@ public class AdminShopsOverviewViewController implements ViewController
     adminShopsOverviewViewModel
         .addPropertyListener(EventType.ALL_SHOPS_LIST.toString(),
             this::updateListView);
-    System.out
-        .println("controller initialised and asking for the list of shops");
+
     adminShopsOverviewViewModel
         .addPropertyListener(EventType.SUCCESSFUL_SHOP_DELETION.toString(),
             this::onDeleteUpdate);
@@ -44,6 +43,7 @@ public class AdminShopsOverviewViewController implements ViewController
 
   private void onDeleteUpdate(PropertyChangeEvent propertyChangeEvent)
   {
+    System.out.println("updating view after deleting shop");
     updateView();
   }
 
@@ -55,8 +55,7 @@ public class AdminShopsOverviewViewController implements ViewController
   private void updateListView(PropertyChangeEvent event)
   {
     ArrayList<Shop> allShops = (ArrayList<Shop>) event.getNewValue();
-    System.out.println(
-        "controller received the list of shops and is populating the listview");
+
     Platform.runLater(() -> {
       listShops.getItems().clear();
       listShops.getItems().addAll(allShops);

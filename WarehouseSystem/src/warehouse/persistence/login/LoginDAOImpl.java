@@ -31,11 +31,6 @@ public class LoginDAOImpl implements LoginDAO
     public User checkCredentials(String username, String password) {
         User loggedInUser = null;
         try (Connection connection = jdbcController.getConnection();) {
-
-            //check if credentials in Account table
-            //if yes get the user details from Employee, Manager or Admin table
-            //if no return null
-
             PreparedStatement checkCredentialsStatement = connection.prepareStatement("SELECT accountid FROM account WHERE username = ? AND password = ?");
             checkCredentialsStatement.setString(1, username);
             checkCredentialsStatement.setString(2, password);

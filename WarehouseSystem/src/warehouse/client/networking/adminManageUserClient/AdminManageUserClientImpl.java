@@ -6,6 +6,7 @@ import warehouse.shared.networking.adminManageUser.AdminManageUserClientCallback
 import warehouse.shared.transferObjects.EventType;
 import warehouse.shared.transferObjects.User;
 
+import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -71,6 +72,17 @@ public class AdminManageUserClientImpl implements AdminManageUserClient,
       throws RemoteException
   {
     support.firePropertyChange(EventType.ALL_USERS_LIST.toString(), null, allUsers);
+  }
+
+  @Override public void addPropertyListener(String eventName,
+                                            PropertyChangeListener listener)
+  {
+    if(eventName == null)
+    {
+      support.addPropertyChangeListener(listener);
+    } else {
+      support.addPropertyChangeListener(eventName, listener);
+    }
   }
 
 }

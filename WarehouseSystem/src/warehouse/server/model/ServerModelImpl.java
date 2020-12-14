@@ -74,7 +74,6 @@ public class ServerModelImpl implements ServerModel
   @Override public void getAllShops(String clientId)
   {
     ArrayList<Shop> allShops = manageShopsDAO.getAllShops();
-    System.out.println("ServerModelImpl.java checking DAO for allShops list");
     support.firePropertyChange(EventType.ALL_SHOPS_LIST.toString(), clientId, allShops);
   }
 
@@ -87,12 +86,14 @@ public class ServerModelImpl implements ServerModel
   @Override public void deleteShop(String clientId, Shop shop)
   {
     manageShopsDAO.deleteShop(shop);
-    if(!(manageShopsDAO.checkIfShopExists(shop.getCity(), shop.getStreet())))
+    if(!manageShopsDAO.checkIfShopExists(shop.getCity(), shop.getStreet()))
     {
+      System.out.println("shop deleted");
       support.firePropertyChange(EventType.SHOP_DELETED.toString(), null, clientId);
     }
     else
     {
+      System.out.println("shop not deleted");
       support.firePropertyChange(EventType.SHOP_DELETE_ERROR.toString(), null, clientId);
     }
   }

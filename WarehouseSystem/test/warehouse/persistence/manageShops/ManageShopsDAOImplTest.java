@@ -48,4 +48,17 @@ class ManageShopsDAOImplTest {
             &&readShops.get(1).equalsWithOudId(shop2)
             &&readShops.get(2).equalsWithOudId(shop3));
     }
+
+//    @Test
+//    public void deleteShop() {
+//        //arrange
+//        Shop shop1 = new Shop("Horsens", "Kamtjatka", "8700");
+//        shopsDAO.createShop(shop1.getCity(), shop1.getStreet(), shop1.getZipCode());
+//
+//        //act
+//        shopsDAO.deleteShop(shop1);
+//
+//        //assert
+//        assertTrue();
+//    }
 }

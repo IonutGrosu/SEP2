@@ -1,6 +1,8 @@
 package warehouse.client.networking.adminManageUserClient;
 
-public interface AdminManageUserClient
+import warehouse.shared.util.PropertyChangeSubject;
+
+public interface AdminManageUserClient extends PropertyChangeSubject
 {
   void newUser(String firstName, String lastName, String username, String password, String position);
   void getAllUsers(String clientUsernameId);

@@ -6,6 +6,7 @@ import warehouse.shared.networking.adminManageShop.AdminManageShopClientCallback
 import warehouse.shared.transferObjects.EventType;
 import warehouse.shared.transferObjects.Shop;
 
+import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -53,7 +54,6 @@ public class AdminManageShopClientImpl implements AdminManageShopClient,
   @Override public void allShopsResponse(ArrayList<Shop> allShops)
       throws RemoteException
   {
-    System.out.println("allShops list got back to AdminManageShopClientImpl.java");
     support.firePropertyChange(EventType.ALL_SHOPS_LIST.toString(), null, allShops);
   }
 
@@ -81,6 +81,17 @@ public class AdminManageShopClientImpl implements AdminManageShopClient,
     catch (RemoteException e)
     {
       e.printStackTrace();
+    }
+  }
+
+  @Override public void addPropertyListener(String eventName,
+                                            PropertyChangeListener listener)
+  {
+    if(eventName == null)
+    {
+      support.addPropertyChangeListener(listener);
+    } else {
+      support.addPropertyChangeListener(eventName, listener);
     }
   }
 }

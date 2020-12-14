@@ -15,7 +15,6 @@ import java.rmi.server.UnicastRemoteObject;
 public class LoginClientImpl implements LoginClient, LoginClientCallback
 {
   private RMIServer rmiServer;
-  private PropertyChangeSupport support;
 
   public LoginClientImpl()
   {
@@ -27,7 +26,6 @@ public class LoginClientImpl implements LoginClient, LoginClientCallback
     {
       e.printStackTrace();
     }
-    support = new PropertyChangeSupport(this);
     rmiServer = Connection.getRmiServer();
   }
 

@@ -1,6 +1,7 @@
 package warehouse.shared.transferObjects;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class User implements Serializable
 {
@@ -40,5 +41,12 @@ public class User implements Serializable
   public String toString()
   {
     return id + " - " + firstName + " " + lastName + " - " + position;
+  }
+
+  public boolean equalsWithoudId(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    User user = (User) o;
+    return Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(position, user.position);
   }
 }

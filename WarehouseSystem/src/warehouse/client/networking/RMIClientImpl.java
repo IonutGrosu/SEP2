@@ -17,25 +17,33 @@ public class RMIClientImpl implements Client, ClientCallback
   private RMIServer rmiServer;
   private PropertyChangeSupport support;
 
+  private LoginClient loginClient;
+  private AdminManageShopClient adminManageShopClient;
+  private AdminManageUserClient adminManageUserClient;
+
 
   public RMIClientImpl()
   {
     support = new PropertyChangeSupport(this);
+
   }
 
   @Override public LoginClient getLoginClient()
   {
-    return new LoginClientImpl();
+    if (loginClient == null) loginClient = new LoginClientImpl();
+    return loginClient;
   }
 
   @Override public AdminManageUserClient getAdminManageUserClient()
   {
-    return new AdminManageUserClientImpl();
+    if (adminManageUserClient == null) adminManageUserClient = new AdminManageUserClientImpl();
+    return adminManageUserClient;
   }
 
   @Override public AdminManageShopClient getAdminManageShopClient()
   {
-    return new AdminManageShopClientImpl();
+    if (adminManageShopClient == null) adminManageShopClient = new AdminManageShopClientImpl();
+    return adminManageShopClient;
   }
 
   @Override public void addPropertyListener(String eventName,

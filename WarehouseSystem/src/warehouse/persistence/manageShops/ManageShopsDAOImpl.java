@@ -88,7 +88,14 @@ public class ManageShopsDAOImpl implements ManageShopsDAO
 
   @Override public void deleteShop(Shop shop)
   {
-
+    System.out.println("shop to delete: " + shop);
+    try(Connection connection = jdbcController.getConnection()) {
+      PreparedStatement statement = connection.prepareStatement("DELETE FROM shop WHERE shopid = ?");
+      statement.setInt(1, shop.getId());
+      statement.executeUpdate();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    }
   }
 
   @Override
