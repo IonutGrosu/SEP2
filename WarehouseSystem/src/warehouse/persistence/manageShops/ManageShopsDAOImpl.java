@@ -95,12 +95,19 @@ public class ManageShopsDAOImpl implements ManageShopsDAO
   public int createShop(String city, String street, String zipCode) {
     int returnInt = 0;
     try (Connection connection = jdbcController.getConnection()) {
-      PreparedStatement statement1 = connection
-          .prepareStatement("INSERT INTO city VALUES (?, ?)");
-      System.out.println(statement1);
-      statement1.setString(1, city);
-      statement1.setInt(2, Integer.parseInt(zipCode));
-      statement1.executeUpdate();
+      PreparedStatement st = connection
+          .prepareStatement("SELECT * FROM city WHERE zipcode = ?");
+      st.setInt(1, Integer.parseInt(zipCode));
+      ResultSet rs = st.executeQuery();
+      if (!rs.next()){
+        PreparedStatement statement1 = connection
+            .prepareStatement("INSERT INTO city VALUES (?, ?)");
+        System.out.println(statement1);
+        statement1.setString(1, city);
+        statement1.setInt(2, Integer.parseInt(zipCode));
+        statement1.executeUpdate();
+      }
+      //--------------------------------------------------
       PreparedStatement statement2 = connection
               .prepareStatement("INSERT INTO shop VALUES (default, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
       System.out.println(statement2);
