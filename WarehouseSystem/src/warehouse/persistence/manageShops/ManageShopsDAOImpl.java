@@ -69,8 +69,8 @@ public class ManageShopsDAOImpl implements ManageShopsDAO
     ArrayList<Shop> allShops = new ArrayList<>();
 
     try (Connection connection = jdbcController.getConnection()) {
-      PreparedStatement statement = connection.prepareStatement("SELECT * FROM shop FULL OUTER JOIN city\n"
-          + "ON shop.zipcode = city.zipcode;");
+      PreparedStatement statement = connection.prepareStatement("SELECT * FROM (SELECT * FROM shop FULL OUTER JOIN city ON shop.zipcode = city.zipcode) \n"
+          + "as sub WHERE sub.streetname is not null;");
       ResultSet resultSet = statement.executeQuery();
       while (resultSet.next()) {
         int id = resultSet.getInt("shopid");
