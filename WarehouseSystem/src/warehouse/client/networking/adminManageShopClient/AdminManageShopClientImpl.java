@@ -85,7 +85,7 @@ public class AdminManageShopClientImpl implements AdminManageShopClient,
   }
 
   @Override public void addPropertyListener(String eventName,
-                                            PropertyChangeListener listener)
+      PropertyChangeListener listener)
   {
     if(eventName == null)
     {

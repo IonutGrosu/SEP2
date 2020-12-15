@@ -32,7 +32,7 @@ public class WarehouseModelImpl implements WarehouseModel
     client.getAdminManageShopClient().addPropertyListener(EventType.ALL_SHOPS_LIST.toString(), this::broadcastEvent);
     client.getAdminManageUserClient().addPropertyListener(EventType.ALL_USERS_LIST.toString(), this::broadcastEvent);
     // response for successful or error deletion of the shop selected
-    client.getAdminManageShopClient().addPropertyListener(EventType.SHOP_DELETED.toString(), this::deletionEvent); //TODO talk with Maria to fix the events
+    client.getAdminManageShopClient().addPropertyListener(EventType.SHOP_DELETED.toString(), this::deletionEvent);
     client.getAdminManageShopClient().addPropertyListener(EventType.SHOP_DELETE_ERROR.toString(), this::deletionEvent);
   }
 

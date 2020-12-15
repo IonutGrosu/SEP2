@@ -36,15 +36,22 @@ public class AdminShopsOverviewViewController implements ViewController
         .addPropertyListener(EventType.ALL_SHOPS_LIST.toString(),
             this::updateListView);
 
-    adminShopsOverviewViewModel
-        .addPropertyListener(EventType.SUCCESSFUL_SHOP_DELETION.toString(),
-            this::onDeleteUpdate);
+    adminShopsOverviewViewModel.addPropertyListener(EventType.SHOP_DELETED.toString(), this::onDeleteUpdate);
+    adminShopsOverviewViewModel.addPropertyListener(EventType.SHOP_DELETE_ERROR.toString(), this::onDeleteUpdate);
   }
 
   private void onDeleteUpdate(PropertyChangeEvent propertyChangeEvent)
   {
-    System.out.println("updating view after deleting shop");
-    updateView();
+    if(EventType.SHOP_DELETED.toString().equals(propertyChangeEvent.getPropertyName()))
+    {
+      System.out.println("Shop deleted");
+      updateView();
+    }
+    if(EventType.SHOP_DELETE_ERROR.toString().equals(propertyChangeEvent.getPropertyName()))
+    {
+      System.out.println("Error when shop tried to be deleted");
+      updateView();
+    }
   }
 
   @Override public void updateView()

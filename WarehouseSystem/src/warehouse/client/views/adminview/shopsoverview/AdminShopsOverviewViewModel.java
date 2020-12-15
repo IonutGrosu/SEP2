@@ -19,7 +19,8 @@ public class AdminShopsOverviewViewModel implements PropertyChangeSubject {
         support = new PropertyChangeSupport(this);
 
         this.warehouseModel.addPropertyListener(EventType.ALL_SHOPS_LIST.toString(), this::broadcastEvent);
-        this.warehouseModel.addPropertyListener(EventType.SUCCESSFUL_SHOP_DELETION.toString(), this::onDeleteResponse);
+        this.warehouseModel.addPropertyListener(EventType.SHOP_DELETED.toString(), this::onDeleteResponse);
+        this.warehouseModel.addPropertyListener(EventType.SHOP_DELETE_ERROR.toString(), this::onDeleteResponse);
     }
 
     private void onDeleteResponse(PropertyChangeEvent propertyChangeEvent)
