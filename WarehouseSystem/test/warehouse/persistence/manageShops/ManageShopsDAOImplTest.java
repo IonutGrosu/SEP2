@@ -20,14 +20,22 @@ class ManageShopsDAOImplTest {
 
     @Test
     public void insertShopIntoTable() {
+        // act
         shopsDAO.createShop("Horsens", "Kamtjatka", "8700");
+        // assert
+        assertTrue(shopsDAO.checkIfShopExists("Horsens", "Kamtjatka"));
     }
 
     @Test
     public void insertShopsIntoTable() {
+        // act
         shopsDAO.createShop("Horsens", "Kamtjatka", "8700");
         shopsDAO.createShop("Aarhus", "Cezarygade", "8000");
         shopsDAO.createShop("Aarhus", "Mariavej", "8000");
+        // assert
+        assertTrue(shopsDAO.checkIfShopExists("Horsens", "Kamtjatka"));
+        assertTrue(shopsDAO.checkIfShopExists("Aarhus", "Cezarygade"));
+        assertTrue(shopsDAO.checkIfShopExists("Aarhus", "Mariavej"));
     }
 
     @Test

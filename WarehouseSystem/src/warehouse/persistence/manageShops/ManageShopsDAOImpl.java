@@ -129,4 +129,14 @@ public class ManageShopsDAOImpl implements ManageShopsDAO
     }
     return returnInt;
   }
+
+  public void deleteAllShops  () {
+    try(Connection connection = jdbcController.getConnection()) {
+      PreparedStatement statement = connection.prepareStatement("DELETE FROM shop");
+      statement.executeUpdate();
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    }
+  }
+
 }
