@@ -103,7 +103,7 @@ public class ViewHandler
   public void openAdminShopsOverviewView()
   {
     FXMLLoader loader = new FXMLLoader();
-    ViewController controller = null;
+    AdminShopsOverviewViewController controller = null;
 
     if(adminShopsOverviewScene == null)
     {
@@ -118,6 +118,7 @@ public class ViewHandler
 
     stage.setTitle("Shops overview");
     stage.setScene(adminShopsOverviewScene);
+
   }
 
   public void openAdminCreateShopView() {
@@ -143,21 +144,5 @@ public class ViewHandler
   {
     openLoginView();
     stage.show();
-  }
-
-  public void openViewPlaceholder()
-  {
-  }
-
-  public void openView2Placeholder()
-  {
-  }
-
-  public void openView3Placeholder()
-  {
-  }
-
-  public void openView4Placeholder()
-  {
   }
 }

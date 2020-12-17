@@ -4,12 +4,10 @@ import warehouse.client.networking.Client;
 import warehouse.shared.transferObjects.EventType;
 import warehouse.shared.transferObjects.Shop;
 import warehouse.shared.transferObjects.User;
-import warehouse.shared.transferObjects.UserType;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.rmi.RemoteException;
 
 public class WarehouseModelImpl implements WarehouseModel
 {

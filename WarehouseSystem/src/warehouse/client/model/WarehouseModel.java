@@ -11,5 +11,5 @@ public interface WarehouseModel extends PropertyChangeSubject {
       String password, String position);
     void getAllShops();
     void getAllUsers();
-  void deleteShop(Shop shop);
+    void deleteShop(Shop shop);
 }
